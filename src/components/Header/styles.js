@@ -11,6 +11,9 @@ export const Container = styled.header`
   border-bottom-style: solid;
   border-bottom-color: gray;
 
+  background-color: #f5f5fa;
+  color: #17171f;
+
   display: flex;
   justify-content: space-between;
 
@@ -22,7 +25,7 @@ export const Logo = styled.div`
   align-items: center;
 
   > img {
-    width: 100px;
+    width: 150px;
   }
 `;
 
@@ -31,8 +34,8 @@ export const Navigation = styled.nav`
   justify-content: space-between;
 
   > ul {
-   display: flex;
-   margin: 10px;
+    display: flex;
+    margin: 10px;
     text-decoration: none;
     list-style: none;
     font-family: "Poppins", sans-serif;
@@ -40,33 +43,30 @@ export const Navigation = styled.nav`
     gap: 80px;
   }
 
-  > ul li{
+  > ul li {
     cursor: pointer;
-     position: relative;
+    position: relative;
   }
 
-  > ul li:hover{
-    color: #3c1424;
-    font-size: 18px;
+  > ul li:hover {
+    color: #2c4f2b;
     transition: 0.3s;
   }
 
   > ul li::after {
-  content: "";
-  position: absolute;
-  display: block;
-  height: 0.4rem;
-  width: 0%;
-  background: #3c1424;
-  bottom: -1rem;
-  transition: all ease-in-out 250ms;
-}
+    content: "";
+    position: absolute;
+    display: block;
+    height: 0.4rem;
+    width: 0%;
+    background: #2c4f2b;
+    bottom: -1rem;
+    transition: all ease-in-out 250ms;
+  }
 
-> ul li:hover::after {
-  width: 60%;
-}
-
-  
+  > ul li:hover::after {
+    width: 60%;
+  }
 `;
 
 export const Options = styled.div`
@@ -79,4 +79,52 @@ export const Options = styled.div`
     border: none;
     background: none;
   }
+
+  > button:hover {
+    color: #2c4f2b;
+    transition: 0.3s;
+  }
+`;
+
+export const Modal = styled.div`
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+`;
+
+export const Overlay = styled.div`
+  background: rgba(49, 49, 49, 0.8);
+  height: 100vh;
+`;
+
+export const ModalContent = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 50px;
+  border-radius: 10px;
+  max-width: 600px;
+  min-width: 300px;
+
+  > button {
+    color: black;
+    font-size: 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
+  }
+
+  
 `;
