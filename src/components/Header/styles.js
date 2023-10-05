@@ -49,7 +49,7 @@ export const Navigation = styled.nav`
   }
 
   > ul li:hover {
-    color: #2c4f2b;
+    color: #f2a61f;
     transition: 0.3s;
   }
 
@@ -59,7 +59,7 @@ export const Navigation = styled.nav`
     display: block;
     height: 0.4rem;
     width: 0%;
-    background: #2c4f2b;
+    background: #f2a61f;
     bottom: -1rem;
     transition: all ease-in-out 250ms;
   }
@@ -81,7 +81,7 @@ export const Options = styled.div`
   }
 
   > button:hover {
-    color: #2c4f2b;
+    color: #f2a61f;
     transition: 0.3s;
   }
 `;
