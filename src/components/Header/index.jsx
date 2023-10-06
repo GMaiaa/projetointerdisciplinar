@@ -1,5 +1,5 @@
 import { RiShutDownLine } from "react-icons/ri";
-import { Container, Logo, Options, Navigation, Modal, ModalContent, Overlay,StyledCheckbox,CheckboxLabel,StyledButton} from "./styles";
+import { Container, Logo, Options, Navigation, Modal, ModalContent, Overlay,StyledButton} from "./styles";
 import { CgProfile } from "react-icons/cg";
 import { FiMail, FiLock } from "react-icons/fi"
 import { AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai";
