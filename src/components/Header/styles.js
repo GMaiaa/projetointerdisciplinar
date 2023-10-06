@@ -107,12 +107,12 @@ export const ModalContent = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
-  background: #f1f1f1;
+  background: white;
   padding: 50px;
   border-radius: 10px;
   max-width: 600px;
   min-width: 300px;
-
+  
   > button {
     color: black;
     font-size: 16px;
@@ -125,6 +125,40 @@ export const ModalContent = styled.div`
     right: 10px;
     padding: 5px 7px;
   }
+    span{
+      color: #f2a61f;
+    }
+
+    h3{
+      margin-bottom:10px;
+    }
 
   
+`
+
+
+export const StyledButton = styled.button`  
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  /* width: 153px; */
+  height: 40px;
+  background-color: #f2a61f;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  border-radius: 0.25rem;
+  border: none;
+  margin-top: 20px;
+
+  &:hover {
+    color: black;
+  }
 `;
+
+
+
+
+
