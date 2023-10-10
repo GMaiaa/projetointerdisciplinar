@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CgProfile } from 'react-icons/cg';
 
 export const Container = styled.header`
   grid-area: header;
@@ -11,7 +12,7 @@ export const Container = styled.header`
   border-bottom-style: solid;
   border-bottom-color: gray;
 
-  background-color: #f5f5fa;
+  background-color: white;
   color: #17171f;
 
   display: flex;
@@ -21,6 +22,7 @@ export const Container = styled.header`
 `;
 
 export const Logo = styled.div`
+margin-top:10px;
   display: flex;
   align-items: center;
 
@@ -71,11 +73,11 @@ export const Navigation = styled.nav`
 
 export const Options = styled.div`
   display: flex;
-  gap: 50px;
+
 
   > button {
     color: black;
-    font-size: 36px;
+    font-size: 16px;
     border: none;
     background: none;
   }
@@ -84,6 +86,10 @@ export const Options = styled.div`
     color: #f2a61f;
     transition: 0.3s;
   }
+`;
+export const StyledCgProfile = styled(CgProfile)`
+width:75px;
+display:block;
 `;
 
 export const Modal = styled.div`
@@ -96,9 +102,12 @@ export const Modal = styled.div`
   position: fixed;
 `;
 
+
 export const Overlay = styled.div`
   background: rgba(49, 49, 49, 0.8);
-  height: 100vh;
+  height: 100%;
+  width:100%;
+  position:fixed;
 `;
 
 export const ModalContent = styled.div`
@@ -132,8 +141,40 @@ export const ModalContent = styled.div`
     h3{
       margin-bottom:10px;
     }
+`
 
+
+export const SecondModalContent = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  max-width: 600px;
+  min-width: 300px;
   
+  > button {
+    color: black;
+    font-size: 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
+  }
+    span{
+      color: #f2a61f;
+    }
+
+    h3{
+      margin-bottom:10px;
+    }
 `
 
 

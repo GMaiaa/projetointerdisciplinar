@@ -28,7 +28,7 @@ export function Home() {
       </AboutContent>
 
       <Section>
-        <h1>Frutas</h1>
+        <h1>Mais vendidos</h1>
         <Items>
           <Item
             urlImage={
@@ -37,7 +37,7 @@ export function Home() {
             name={"Banana"}
             value={"R$8,00"}
           />
-        </Items>
+        </Items> 
       </Section>
       <Footer />
     </Container>
