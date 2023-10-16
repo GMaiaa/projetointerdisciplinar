@@ -73,6 +73,10 @@ export const Navigation = styled.nav`
 
 export const Options = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 80px;
 
 
   > button {
@@ -80,6 +84,11 @@ export const Options = styled.div`
     font-size: 16px;
     border: none;
     background: none;
+  }
+
+  > p{
+    font-weight: 800;
+
   }
 
   > button:hover {
@@ -100,6 +109,7 @@ export const Modal = styled.div`
   right: 0;
   bottom: 0;
   position: fixed;
+  
 `;
 
 

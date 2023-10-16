@@ -40,7 +40,7 @@ export function Header() {
       <Options>
        {/*  <StyledCgProfile /> */}
         <button onClick={toggleModal}>
-          <p>Acesse sua conta</p><br/>
+          <p>Acesse sua conta</p>
         </button>
         <p>Ou</p>
         <button onClick={toggleSecondModal}>

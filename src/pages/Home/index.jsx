@@ -28,7 +28,7 @@ export function Home() {
       </AboutContent>
 
       <Section>
-        <h1>Mais vendidos</h1>
+        <h1>Frutas</h1>
         <Items>
           <Item
             urlImage={

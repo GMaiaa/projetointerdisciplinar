@@ -4,12 +4,11 @@ export const Container = styled.li`
   height: 254px;
   border-radius: 20px;
   background: white;
-  position: relative;
   padding: 1.8rem;
   overflow: visible;
   font-size: 24px; /* Tamanho dos itens da lista de produtos */
-margin-bottom: 10px;
-list-style: none;
+  margin-bottom: 10px;
+  list-style: none;
 
 
 
