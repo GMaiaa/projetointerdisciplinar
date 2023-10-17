@@ -41,7 +41,7 @@ export const Section = styled.section`
   display: flex;
   flex-direction: column;
   width: 1200px;
-  margin: 0 auto;
+  margin: 100px auto;
   padding-top: 65px;
   display: flex;
   align-items: center;
@@ -51,6 +51,10 @@ export const Section = styled.section`
     font-size: 25px;
     color: #f2a61f;
     text-transform: uppercase;
+  }
+
+  >button{
+    flex-direction: end;
   }
 `;
 

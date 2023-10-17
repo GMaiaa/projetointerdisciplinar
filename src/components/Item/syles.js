@@ -13,7 +13,8 @@ export const Container = styled.li`
 
 
   > img{
-    max-width: 120px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
 }
 
@@ -43,4 +44,5 @@ color: black; /* Cor #7A7A7A (cinza) */
     border: none;
     margin-top: 20px;
 }
+
 `;

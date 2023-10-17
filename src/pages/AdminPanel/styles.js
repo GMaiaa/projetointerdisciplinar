@@ -76,7 +76,7 @@ export const NewItem = styled.li`
   align-items: center;
   justify-content: center;
 
-  
+    
 
   svg{  
     margin-right: 8px;
