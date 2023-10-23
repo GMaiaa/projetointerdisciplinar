@@ -1,63 +1,65 @@
-import styled from "styled-components";
+
+import styled from 'styled-components';
+export const Button = styled.button`
+  width: 200px;
+  height: 50px;
+  background-color: #DA951C;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #DA951C;
+    color: black;
+  }
+  border-radius: 0.25rem;
+  border: none;
+  margin-top: 50px;
+  margin-bottom:50px;
+
+`;
+
+export const Image = styled.img`
+    max-width: 500px; /* Defina o tamanho máximo desejado */
+    margin-left:400px;
+`;
 
 export const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-
-  display: grid;
-  grid-template-rows: 105px auto;
-  grid-template-areas:
-    "header"
-    "content";
-
-  > main {
-    grid-area: content;
-    overflow-y: scroll;
-    padding: 64px 0;
-  }
+  display: flex; /* Transforma o contêiner em um contêiner flex */
 `;
-
-export const Description = styled.div`
-    display: flex;
-    flex-direction: column;
-`
-
-export const Commands = styled.div`
-max-width: 550px;
-margin: 0 auto;
-justify-content: center;
-
-display: flex;
-gap: 100px;
-`
-
 
 export const Content = styled.div`
-  max-width: 550px;
-  margin: 0 auto;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  > button:first-child {
-    align-self: end;
-  }
-
-  > h1 {
-    font-size: 36px;
-    font-weight: 500;
-    padding-top: 64px;
-  }
-
-  > p {
-    font-size: 16px;
-    margin-top: 16px;
-    text-align: justify;
-  }
-
-  >img{
-    width: 400px;
-    height: 400px;
-  }
+  margin-left: auto; /* Empurra o conteúdo para a direita */
+  margin-right:500px;
+  margin-top:100px;
 `;
+
+export const Span = styled.span`
+    font-size: 30px; /* Ajuste o tamanho da fonte conforme necessário */
+    color: #DA951C; /* Altera a cor do texto para #DA951C */
+    font-weight:bold;
+`;
+
+export const P = styled.p`
+    margin-top:10px;
+    font-size: 25px; /* Ajuste o tamanho da fonte conforme necessário */
+
+`;
+export const QuantityButton = styled.div`
+  width: 10px;
+  margin: 0 10px; /* Adiciona margem à esquerda e à direita do botão */
+`;
+
+
+export const Description = styled.p`
+  margin-top:10px;
+  font-size: 20px; /* Diminua o tamanho da fonte conforme necessário */
+  color: #808080; /* Altera a cor do texto para cinza */
+`;
+
+export const Title = styled.span`
+  font-size: 30px; /* Ajuste o tamanho da fonte conforme necessário */
+  color: #DA951C; /* Altera a cor do texto para #F52E17 */
+  font-weight:bold;
+  margin-left:150px;
+`;
+
