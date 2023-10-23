@@ -3,8 +3,23 @@ import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
 import { Input } from "../../components/Input";
 import { FiSearch, FiPlus } from "react-icons/fi"
+import { Section } from "../../components/Section";
+import { Product } from "../../components/Product";
+import { api } from "../../services/api";
+import { useEffect, useState } from "react";
 
 export function AdminPanel() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const response = await api.get("/product");
+      setProducts(response.data);
+    }
+
+    fetchProducts();
+  }, []);
+
   return (
     <Container>
       <Logo>
@@ -31,7 +46,18 @@ export function AdminPanel() {
         />
       </Search>
 
-      <Content></Content>
+      <Content>
+
+      <Section title="Estoque">
+          {products.map((product) => (
+            <Product
+              key={String(product.id)}
+              data={product}
+              onClick={() => handleDetails(product.id)}
+            />
+          ))}
+        </Section>
+      </Content>
 
       <NewItem>
         <FiPlus />
