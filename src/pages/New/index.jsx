@@ -9,8 +9,6 @@ import { ButtonText } from "../../components/ButtonText";
 import { InputCheckbox } from "../../components/InputCheckbox";
 import { api } from "../../services/api";
 
-import { Container, Form } from "./styles";
-import { useState } from "react";
 
 export function New() {
   const [name, setName] = useState("");
