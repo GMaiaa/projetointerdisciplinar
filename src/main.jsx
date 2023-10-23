@@ -10,6 +10,6 @@ import { Details } from './pages/Details';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <GlobalStyles />
-    <AdminPanel />
+    <Home />
   </React.StrictMode>,
 )

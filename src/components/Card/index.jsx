@@ -3,7 +3,7 @@
 import { useState } from "react";
     
 
-    export function Card(){
+    export function Card({ image, name, value }){
 
         return(
             <Container>
