@@ -1,7 +1,10 @@
+import React, { useState } from "react";
 import { Header } from "../../components/Header";
+
 import { Input } from "../../components/Input";
-import { Textarea } from "../../components/Textarea";
+
 import { Button } from "../../components/Button";
+import { Container, Form } from "./styles";
 import { ButtonText } from "../../components/ButtonText";
 import { InputCheckbox } from "../../components/InputCheckbox";
 import { api } from "../../services/api";
@@ -31,10 +34,10 @@ export function New() {
     alert("Produto cadastrado com sucesso!");
   }
 
+
   return (
     <Container>
       <Header />
-
       <main>
         <Form>
           <header>
@@ -60,7 +63,9 @@ export function New() {
           onClick={handleNewProduct}
           />
         </Form>
+        {mensagem && <div>{mensagem}</div>} 
       </main>
     </Container>
   );
 }
+
