@@ -7,6 +7,7 @@ import { Section } from "../../components/Section";
 import { Product } from "../../components/Product";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function AdminPanel() {
   const [products, setProducts] = useState([]);
@@ -53,13 +54,13 @@ export function AdminPanel() {
             <Product
               key={String(product.id)}
               data={product}
-              onClick={() => handleDetails(product.id)}
             />
           ))}
         </Section>
       </Content>
 
-      <NewItem>
+      
+      <NewItem to="/new">
         <FiPlus />
         Adicionar novo produto
       </NewItem>

@@ -5,9 +5,10 @@ import { Input } from "../../components/Input";
 
 import { Button } from "../../components/Button";
 import { Container, Form } from "./styles";
+import { Textarea } from "../../components/Textarea";
 import { ButtonText } from "../../components/ButtonText";
-import { InputCheckbox } from "../../components/InputCheckbox";
 import { api } from "../../services/api";
+import { Link } from "react-router-dom";
 
 
 export function New() {
@@ -20,7 +21,7 @@ export function New() {
 
 
   async function handleNewProduct(){
-    await api.post("/products" ,{
+    await api.post("/product" ,{
       name,
       value,
       description,
@@ -40,7 +41,10 @@ export function New() {
         <Form>
           <header>
             <h1>Novo Produto</h1>
-            <ButtonText title="Voltar" />
+            <Link to="/adminpanel">
+             <ButtonText title="Voltar" />
+            </Link>
+           
           </header>
 
           <Input placeholder="Nome do produto" 
@@ -61,7 +65,6 @@ export function New() {
           onClick={handleNewProduct}
           />
         </Form>
-        {mensagem && <div>{mensagem}</div>} 
       </main>
     </Container>
   );

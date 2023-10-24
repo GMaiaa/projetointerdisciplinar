@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     width: 100%;
@@ -66,9 +67,9 @@ export const Content = styled.div`
   
 `;
 
-export const NewItem = styled.li`
+export const NewItem = styled(Link)`
   grid-area: newitem;
-
+cursor: pointer;
   background-color: #f2a61f;
   color: white;
 
