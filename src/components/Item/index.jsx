@@ -1,13 +1,10 @@
     import { Container } from "./syles";
-    import { api } from "../../services/api";
-import { useState } from "react";
     
 
-    export function Card({ image, name, value }){
-
+    export function Item({urlImage, name, value}){
         return(
             <Container>
-                <img src={image} alt=""/>
+                <img src={urlImage} alt=""/>
                 <h1> {name} </h1>
                 <p>{value}</p>
                 <button>Encomendar</button>
