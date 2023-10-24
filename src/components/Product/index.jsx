@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
-import { Container, Options, Body } from "./styles";
+import { Container, Options, Body, Update } from "./styles";
 import { MdModeEditOutline, MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 
@@ -22,9 +22,9 @@ export function Product({ data, ...rest }) {
         <h1> {data.name} </h1>
         <Options>
            
-          <button>
+          <Update to="/update">
             <MdModeEditOutline />
-          </button>
+          </Update>
         
           <button onClick={HandleDeleteProduct} >
             <MdDelete />

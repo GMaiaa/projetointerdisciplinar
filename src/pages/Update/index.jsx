@@ -9,45 +9,18 @@ import { api } from "../../services/api";
 import { Link, useParams } from "react-router-dom";
 
 export function Update() {
-  const { id } = useParams();
-  const [productData, setProductData] = useState({
-    name: "",
-    value: "",
-    description: "",
-    image: "",
-    amount: "",
-    category: ""
-  });
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await api.get(`/product/${id}`);
-        setProductData(response.data);
-      } catch (error) {
+  
+  function handleUpdateProduct(updatedData) {
+    api.put(`product/${data.id}`, updatedData)
+      .then(() => {
+        alert(`Item ${data.name} foi atualizado`);
+      })
+      .catch(error => {
         console.error(error);
-      }
-    }
-    fetchData();
-  }, [id]);
-
-  async function handleUpdateProduct() {
-    try {
-      await api.put(`/product/${id}`, productData);
-      alert("Produto atualizado com sucesso!");
-    } catch (error) {
-      console.error(error);
-      alert("Erro ao atualizar o produto.");
-    }
+      });
   }
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProductData({
-      ...productData,
-      [name]: value,
-    });
-  };
+  
 
   return (
     <Container>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.button`
@@ -52,3 +53,7 @@ export const Options = styled.div`
     color: #f2a61f;
   }
 `;
+
+export const Update = styled(Link)`
+
+`
