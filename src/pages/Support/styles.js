@@ -44,7 +44,7 @@ export const Questions = styled.section`
   padding-top: 65px;
   display: flex;
   align-items: center;
-
+  justify-content: space-around;
 `;
 
 export const Items = styled.div`
