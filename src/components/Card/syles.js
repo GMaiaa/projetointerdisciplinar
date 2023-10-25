@@ -9,7 +9,7 @@ export const Container = styled.li`
   font-size: 24px; /* Tamanho dos itens da lista de produtos */
   margin-bottom: 10px;
   list-style: none;
-
+/* border: 1px #000 solid; */
 
 
   > img{
@@ -43,6 +43,12 @@ color: black; /* Cor #7A7A7A (cinza) */
     border-radius: 0.25rem;
     border: none;
     margin-top: 20px;
+}
+
+@media screen and (max-width: 360px){
+   
+   
+
 }
 
 `;

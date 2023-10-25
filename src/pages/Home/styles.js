@@ -35,6 +35,26 @@ export const AboutContent = styled.div`
   > img {
     width: 400px;
   }
+
+  @media screen and (max-width: 900px) {
+    > img {
+      width: 200px;
+    }
+    > div {
+    width: 200px;
+  }
+  
+
+  @media screen and (max-width: 360px) {
+    flex-direction: column;
+    width: 360px;
+    > img {
+      width: 200px;
+    }
+    > div {
+    width: 200px;
+  }
+  }
 `;
 
 export const Section = styled.section`
@@ -56,10 +76,28 @@ export const Section = styled.section`
   >button{
     flex-direction: end;
   }
+
+  @media screen and (max-width: 900px) {
+
+  }
+  
+
+  @media screen and (max-width: 360px) {
+    justify-content: center;
+    width: 360px;
+    }
 `;
 
-export const Items = styled.div`
-gap: 50px;
+export const Items = styled.ul`
+  gap: 50px;
   display: flex;
   flex-direction: row;
+  @media screen and (max-width: 900px) {
+
+  }
+
+  @media screen and (max-width: 360px) {
+    width: 360px;
+    flex-direction: column;
+  }
 `

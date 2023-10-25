@@ -8,17 +8,17 @@ import { ButtonText } from "../../components/ButtonText";
 export function Home() {
   return (
     <Container>
-      <Header />
+      
       <AboutContent>
         <div>
           <h2>
             {" "}
-            Realize a sua <span> encomenda </span> para
+           Realize a sua <span> encomenda </span> para
             <span> Retirada </span> ou <span> entrega </span>
           </h2>
           <p>
             Qualidade é a nossa prioridade. Com cuidado e dedicação,
-            selecionamos os melhores produtos frescos e sazonais para você e sua
+            selecionamos os melhores produtos frescos e sazonais para você e a sua
             família.
           </p>
         </div>
