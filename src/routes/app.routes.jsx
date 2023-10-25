@@ -5,6 +5,7 @@ import { New } from '../pages/New'
 import {Home } from "../pages/Home"
 import { Update } from '../pages/Update'
 import { Support } from '../pages/Support'
+import {Details} from '../pages/Details'
 
 export function AppRoutes(){
     return(
@@ -14,6 +15,7 @@ export function AppRoutes(){
             <Route path="/new" element={<New/>}/>
             <Route path="/update" element={<Update/>}/>
             <Route path="/support" element={<Support/>}/>
+            <Route path="/Details" element={<Details/>}/>
 
         </Routes>
     )
