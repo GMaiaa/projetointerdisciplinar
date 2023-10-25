@@ -9,10 +9,35 @@ import  LogoImg from "../../assets/logo.png"
 import { useState } from "react";
 import { Input } from "../Input";
 import Checkbox from "../Checkbox";
+import { api } from "../../services/api";
+
+
 
 
 export function Header() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [modal, setModal] = useState(false)
+
+ function handlesaveUser(){
+    if(password !== confirmPassword) {
+      alert("As senhas não correspondem!");
+      return;
+    }
+  
+     api.post("/user" ,{
+      name,
+      phone,
+      email,
+      password
+    });
+  
+    alert("Cliente cadastrado com sucesso!");
+  }
+  
 
   const toggleModal = () =>{
     setModal(!modal)
@@ -66,28 +91,29 @@ export function Header() {
         </ModalContent>
       </Modal>
       )}
-      {SecondModal && (
-        <Modal>
-        <Overlay/>        
-        <SecondModalContent>
-          <h3>Crie sua conta aqui!</h3> <br/>
-          <form>
-          <Input placeholder="Nome completo" type="text" icon={BiSolidUserPin}/>
-          <Input placeholder="Celular" type="text" icon={BiLogoWhatsappSquare}/>
-          <Input placeholder="E-mail" type="text" icon={FiMail}/>
-          <Input placeholder="Senha" type="password" icon={FiLock}/>
-          <Input placeholder="Confirme sua Senha" type="password" icon={FiLock}/>
-          
-          <Checkbox label="Lembrar dados" />
-          <StyledButton>Cadastra-se</StyledButton>
-          </form>
-          <button onClick={toggleSecondModal}>
-            <AiOutlineClose/>
-          </button>
-        </SecondModalContent>
-      </Modal>
-      )}
-      
+     {SecondModal && (
+  <Modal>
+    <Overlay/>        
+    <SecondModalContent>
+      <h3>Crie sua conta aqui!</h3> <br/>
+      <form>
+        <Input placeholder="Nome completo" type="text" icon={BiSolidUserPin} onChange={e => setName(e.target.value)}/>
+        <Input placeholder="Celular" type="text" icon={BiLogoWhatsappSquare} onChange={e => setPhone(e.target.value)}/>
+        <Input placeholder="E-mail" type="text" icon={FiMail} onChange={e => setEmail(e.target.value)}/>
+        <Input placeholder="Senha" type="password" icon={FiLock} onChange={e => setPassword(e.target.value)}/>
+        <Input placeholder="Confirme sua Senha" type="password" icon={FiLock} onChange={e => setConfirmPassword(e.target.value)}/>
+        
+        <Checkbox label="Lembrar dados" />
+        <StyledButton onClick={handlesaveUser}>Cadastra-se</StyledButton>
+      </form>
+      <button onClick={toggleSecondModal}>
+        <AiOutlineClose/>
+      </button>
+    </SecondModalContent>
+  </Modal>
+)}
     </Container>
+      
   );
 }
+
