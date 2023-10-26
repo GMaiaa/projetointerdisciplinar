@@ -1,26 +1,57 @@
 import React, { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Container, Form } from "./styles";
 import { Textarea } from "../../components/Textarea";
 import { ButtonText } from "../../components/ButtonText";
-import { api } from "../../services/api";
-import { Link, useParams } from "react-router-dom";
+import { api } from "../../services/api"; // Importa o serviço API
 
 export function Update() {
-  
-  function handleUpdateProduct(updatedData) {
-    api.put(`product/${data.id}`, updatedData)
-      .then(() => {
-        alert(`Item ${data.name} foi atualizado`);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [productData, setProductData] = useState({
+    name: "",
+    value: "",
+    image: "",
+    amount: "",
+    category: "",
+    description: "",
+  });
 
-  
+  useEffect(() => {
+    if (!id) return;
+    const fetchProduct = async () => {
+      try {
+        const response = await api.get(`product/${id}`);
+        setProductData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchProduct();
+  }, [id]);
+
+  const handleUpdateProduct = async () => {
+    try {
+      if (id === "new") {
+        await api.post("product", productData);
+      } else {
+        await api.put(`product/${id}`, productData);
+      }
+      alert(`Item ${productData.name} foi atualizado`);
+      navigate("/adminPanel");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const productClone = { ...productData };
+    productClone[e.target.name] = e.target.value;
+    setProductData(productClone);
+  };
 
   return (
     <Container>
@@ -33,7 +64,6 @@ export function Update() {
               <ButtonText title="Voltar" />
             </Link>
           </header>
-
           <Input
             name="name"
             placeholder="Nome do produto"
