@@ -1,16 +1,19 @@
-import { Container, Logo, Menu, Search, Content, NewItem} from "./styles";
+import { Container, Logo, Menu, Search, Content, NewItem } from "./styles";
 import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
 import { Input } from "../../components/Input";
-import { FiSearch, FiPlus } from "react-icons/fi"
+import { FiSearch, FiPlus } from "react-icons/fi";
 import { Section } from "../../components/Section";
 import { Product } from "../../components/Product";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { User } from "../../components/User";
 
 export function AdminPanel() {
   const [products, setProducts] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [activeSection, setActiveSection] = useState("Estoque"); // Track the active section
 
   useEffect(() => {
     async function fetchProducts() {
@@ -20,6 +23,19 @@ export function AdminPanel() {
 
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      const response = await api.get("/user");
+      setUsers(response.data);
+    }
+    fetchUsers();
+  }, []);
+
+  // Function to handle section selection
+  const handleSectionSelected = (section) => {
+    setActiveSection(section);
+  };
 
   return (
     <Container>
@@ -33,8 +49,15 @@ export function AdminPanel() {
         <li>
           <ButtonText
             title="Todos"
-            onClick={() => handleTagSelected("all")}
-            isActive
+            onClick={() => handleSectionSelected("Estoque")} // Show Estoque section
+            isActive={activeSection === "Estoque"}
+          />
+        </li>
+        <li>
+          <ButtonText
+            title="Clientes"
+            onClick={() => handleSectionSelected("Clientes")} // Show Clientes section
+            isActive={activeSection === "Clientes"}
           />
         </li>
       </Menu>
@@ -48,18 +71,27 @@ export function AdminPanel() {
       </Search>
 
       <Content>
-
-      <Section title="Estoque">
-          {products.map((product) => (
-            <Product
-              key={String(product.id)}
-              data={product}
-            />
-          ))}
-        </Section>
+        {activeSection === "Estoque" && (
+          <Section title="Estoque">
+            {products.map((product) => (
+              <Product
+                key={String(product.id)}
+                data={product}
+                // Pass the product ID to the handleUpdateProduct function
+                updateProduct={() => handleUpdateProduct(product.id)}
+              />
+            ))}
+          </Section>
+        )}
+        {activeSection === "Clientes" && (
+          <Section title="Clientes">
+            {users.map((user) => (
+              <User key={String(user.id)} data={user} /> // Use the User component
+            ))}
+          </Section>
+        )}
       </Content>
 
-      
       <NewItem to="/new">
         <FiPlus />
         Adicionar novo produto
