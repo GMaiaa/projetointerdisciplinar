@@ -8,7 +8,7 @@ import { ButtonText } from "../../components/ButtonText";
 export function Home() {
   return (
     <Container>
-      
+      <Header />
       <AboutContent>
         <div>
           <h2>
