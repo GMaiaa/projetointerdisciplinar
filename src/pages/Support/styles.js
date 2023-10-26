@@ -47,8 +47,12 @@ export const Questions = styled.section`
   justify-content: space-around;
 `;
 
-export const Items = styled.div`
-gap: 50px;
+export const Contacts = styled.div`
   display: flex;
-  flex-direction: row;
+  width: 1200px;
+  margin: 100px auto;
+  padding-top: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `

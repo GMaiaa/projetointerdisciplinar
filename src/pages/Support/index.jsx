@@ -1,4 +1,4 @@
-import { Container, AboutSupport, Questions, Items } from "./styles";
+import { Container, AboutSupport, Questions, Contacts } from "./styles";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import Undraw from "../../assets/suport.svg";
@@ -7,7 +7,9 @@ import Pagamento from "../../assets/pagamento.jpg";
 import Info from "../../assets/info.jpg"
 import { Card } from "../../components/Card";
 import { ButtonText } from "../../components/ButtonText";
+import { SupportContactCard } from "../../components/SupportContactCard";
 import { SupportCard } from "../../components/SupportCard";
+import {AiFillInstagram} from "react-icons/ai"
 
 
 export function Support() {
@@ -36,6 +38,10 @@ export function Support() {
         <SupportCard image={Info} title="Informações da loja" description="Informações como endereço, horario de funcionamento e muito mais "/>
 
     </Questions>
+
+    <Contacts>
+    <SupportContactCard title="Instagram" description="Siga a loja e fique por dentro das novidades" icon={AiFillInstagram} span="Siga-nos"/>
+    </Contacts>
 
 
       <Footer />
