@@ -54,11 +54,12 @@ export const Section = styled.section`
   }
 
   >button{
-    flex-direction: end;
+    margin-left: auto;
   }
 `;
 
 export const Items = styled.div`
+margin-top: 40px;
 gap: 50px;
   display: flex;
   flex-direction: row;

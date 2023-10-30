@@ -7,13 +7,18 @@ import { Section } from "../../components/Section";
 import { Product } from "../../components/Product";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { User } from "../../components/User";
 
 export function AdminPanel() {
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
   const [activeSection, setActiveSection] = useState("Estoque"); // Track the active section
+  const navigate = useNavigate();
+
+  function handleDetails(id) {
+    navigate(`/details/${id}`);
+  }
 
   useEffect(() => {
     async function fetchProducts() {
@@ -77,6 +82,7 @@ export function AdminPanel() {
               <Product
                 key={String(product.id)}
                 data={product}
+                onClick={() => handleDetails(product.id)}
                 // Pass the product ID to the handleUpdateProduct function
                 updateProduct={() => handleUpdateProduct(product.id)}
               />

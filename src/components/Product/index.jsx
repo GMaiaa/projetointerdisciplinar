@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 
 export function Product({ data, ...rest }) {
   function HandleDeleteProduct() {
+    const confirm = window.confirm("Deseja realmente remover a nota?")
+
+    if(confirm){
     api.delete(`product/${data.id}`)
       .then((response) => {
         alert(`Item ${data.name} foi deletado`);
@@ -13,6 +16,7 @@ export function Product({ data, ...rest }) {
       .catch((error) => {
         console.error(error);
       });
+    }
   }
 
   return (

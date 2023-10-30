@@ -16,7 +16,7 @@ export function AppRoutes() {
             <Route path="/new" element={<New />} />
             <Route path="/update" element={<Update />} />
             <Route path="/support" element={<Support />} />
-            <Route path="/details" element={<Details />} />
+            <Route path="/details/:id" element={<Details/>}/>
             <Route path="/users" element={<User />} />
 
         </Routes>

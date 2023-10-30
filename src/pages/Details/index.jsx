@@ -1,36 +1,50 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-import { Button, Image, Container, Content, P, Span, Description,Title } from "./styles";
+import {Content, Description,Title, Info, Container, More} from "./styles";
 import {Card} from "../../components/Card";
 import {Items} from "../../pages/Home/styles";
 import {Item} from "../../components/Item"
+import { useParams } from 'react-router-dom';
+import { api } from '../../services/api';
 
 export function Details() {
+  const [data, setData] = useState(null);
 
-    const product = {
-        Item: {
-          name: "Maçã",
-          value: "R$ 2,00",
-          urlImage: "https://scfoods.fbitsstatic.net/img/p/maca-red-argentina-unidade-70942/257561.jpg?w=800&h=800&v=no-change&qs=ignore",
-          descricao:"Apresentamos a você nossa maçã premium, cuidadosamente selecionada para garantir a mais alta qualidade. Esta maçã é conhecida por sua cor vermelha brilhante e pele lisa, um verdadeiro deleite para os olhos."
-        }
-    };
+  const params = useParams();
+
+  useEffect(() => {
+    async function fetchProduct() {
+      const response = await api.get(`/product/${params.id}`);
+      setData(response.data);
+    }
+
+    fetchProduct();
+  }, []);
 
     return (
-      <div>
-        <Header />
-        <Container>
-          <Image src={product.Item.urlImage} /> 
-          <Content>
-            <Span>{product.Item.name}</Span><p></p>
-            <P>{product.Item.value}</P> 
-            <Button>Adicionar ao carrinho</Button>
-            <P>Descrição:</P><Description>{product.Item.descricao}</Description>
-          </Content>
-        </Container>
-        <Container>
+      <Container>
+      <Header />
+
+      {data && (
+        <main>
+         <Content>
+          <img src={data.image} />
+          <Info>
+            <span>{data.name}</span>
+            <p>{data.value.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+          minimumFractionDigits: 2,
+        })}</p>
+            <button>Adicionar ao carrinho</button>
+            <p>Descrição:</p><Description>{data.description}</Description>
+          </Info>
+        </Content>
+        </main>
+        )}
+       <More>
           <Title>Veja também:</Title>
           <Items>
             <Item
@@ -59,9 +73,8 @@ export function Details() {
               urlImage="https://hortifruti.com.br/media/catalog/product/cache/e43ef0ed2520a1b4f5eb0225d3cc2507/1/0/100128---2116220000008---espinafre.jpg?auto=webp&format=pjpg&width=160&height=200&fit=cover"
             />
           </Items>
-        </Container>
+        </More>
         <Footer />
-      </div>
-    );    
-
+    </Container>
+  );
 }

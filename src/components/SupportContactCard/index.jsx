@@ -1,14 +1,11 @@
 import { Container } from "./styles";
 
-export function SupportContactCard({ icon: Icon, title, description, span}) {
+export function SupportContactCard({ title , url, color}) {
     return (
-        <Container>
-            {Icon && <Icon size={20} />}
-            <strong>{title}</strong>
-            <div>
-               {description}
-            </div>
-            <span>{span}</span>
+        <Container color={color} to={url}>
+	    {title}
+	    <div class="horizontal"></div>
+	    <div class="button__vertical"></div>
         </Container>
     )
 }

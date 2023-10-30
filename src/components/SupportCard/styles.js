@@ -29,7 +29,7 @@ export const Image = styled.div`
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${props => props.backgroundImage});
     background-size: cover;
     
-`
+`   
 
 export const Content = styled.div`
     display: flex;

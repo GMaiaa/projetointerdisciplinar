@@ -40,7 +40,10 @@ export function Support() {
     </Questions>
 
     <Contacts>
-    <SupportContactCard title="Instagram" description="Siga a loja e fique por dentro das novidades" icon={AiFillInstagram} span="Siga-nos"/>
+    <SupportContactCard title="Instagram" color="#5851DB"/>
+    <SupportContactCard title="Whatsapp" color="#25d366"/>
+    <SupportContactCard title="E-mail" color="#db4a39"/>
+
     </Contacts>
 
 

@@ -9,50 +9,6 @@ import { ButtonText } from "../../components/ButtonText";
 import { api } from "../../services/api"; // Importa o serviço API
 
 export function Update() {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const [productData, setProductData] = useState({
-    name: "",
-    value: "",
-    image: "",
-    amount: "",
-    category: "",
-    description: "",
-  });
-
-  useEffect(() => {
-    if (!id) return;
-    const fetchProduct = async () => {
-      try {
-        const response = await api.get(`product/${id}`);
-        setProductData(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchProduct();
-  }, [id]);
-
-  const handleUpdateProduct = async () => {
-    try {
-      if (id === "new") {
-        await api.post("product", productData);
-      } else {
-        await api.put(`product/${id}`, productData);
-      }
-      alert(`Item ${productData.name} foi atualizado`);
-      navigate("/adminPanel");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const productClone = { ...productData };
-    productClone[e.target.name] = e.target.value;
-    setProductData(productClone);
-  };
-
   return (
     <Container>
       <Header />

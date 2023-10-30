@@ -22,7 +22,7 @@ export function Header() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [modal, setModal] = useState(false)
 
- function handlesaveUser(){
+ function handleSaveUser(){
     if(password !== confirmPassword) {
       alert("As senhas não correspondem!");
       return;
@@ -104,7 +104,7 @@ export function Header() {
         <Input placeholder="Confirme sua Senha" type="password" icon={FiLock} onChange={e => setConfirmPassword(e.target.value)}/>
         
         <Checkbox label="Lembrar dados" />
-        <StyledButton onClick={handlesaveUser}>Cadastra-se</StyledButton>
+        <StyledButton onClick={handleSaveUser}>Cadastra-se</StyledButton>
       </form>
       <button onClick={toggleSecondModal}>
         <AiOutlineClose/>
@@ -116,4 +116,3 @@ export function Header() {
       
   );
 }
-
