@@ -82,7 +82,6 @@ export function AdminPanel() {
               <Product
                 key={String(product.id)}
                 data={product}
-                onClick={() => handleDetails(product.id)}
                 // Pass the product ID to the handleUpdateProduct function
                 updateProduct={() => handleUpdateProduct(product.id)}
               />

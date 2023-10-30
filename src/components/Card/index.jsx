@@ -16,7 +16,11 @@
             <Container>
                 <img src={image} alt=""/>
                 <h1> {name} </h1>
-                <p>{`R$${value}`}</p>
+                <p>{value.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+          minimumFractionDigits: 2,
+        })}</p>
                 <button>Encomendar</button>
             </Container>
         )

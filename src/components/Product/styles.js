@@ -53,7 +53,3 @@ export const Options = styled.div`
     color: #f2a61f;
   }
 `;
-
-export const Update = styled(Link)`
-
-`

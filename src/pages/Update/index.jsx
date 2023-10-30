@@ -9,6 +9,47 @@ import { ButtonText } from "../../components/ButtonText";
 import { api } from "../../services/api"; // Importa o serviço API
 
 export function Update() {
+  const { id } = useParams();
+  const [productData, setProductData] = useState({
+    name: "",
+    value: "",
+    image: "",
+    amount: "",
+    category: "",
+    description: "",
+  });
+
+  useEffect(() => {
+    
+    async function fetchProductData() {
+      try {
+        const response = await api.get(`/product/${id}`);
+        const product = response.data;
+        setProductData(product); 
+      } catch (error) {
+        console.error("Erro ao buscar dados do produto:", error);
+      }
+    }
+    fetchProductData()
+  }, []);
+
+  const handleUpdateProduct = async () => {
+    const updatedProduct = {
+      name: productData.name,
+      value: productData.value,
+      image: productData.image,
+      amount: productData.amount,
+      category: productData.category,
+      description: productData.description,
+    };
+
+   await api.put(`/product/${id}`, updatedProduct);
+
+   alert("Produto Atualizado com sucesso!");
+
+  };
+  console.log("productData.description:", productData.description);
+
   return (
     <Container>
       <Header />
@@ -24,37 +65,37 @@ export function Update() {
             name="name"
             placeholder="Nome do produto"
             value={productData.name}
-            onChange={handleInputChange}
+            onChange={(e) => setProductData({ ...productData, name: e.target.value })}
           />
           <Input
             name="value"
             placeholder="R$ 00,00"
             value={productData.value}
-            onChange={handleInputChange}
+            onChange={(e) => setProductData({ ...productData, value: e.target.value })}
           />
           <Input
             name="image"
             placeholder="Imagem URL"
             value={productData.image}
-            onChange={handleInputChange}
+            onChange={(e) => setProductData({ ...productData, image: e.target.value })}
           />
           <Input
             name="amount"
             placeholder="Quantidade em estoque"
             value={productData.amount}
-            onChange={handleInputChange}
+            onChange={(e) => setProductData({ ...productData, amount: e.target.value })}
           />
           <Input
             name="category"
             placeholder="Categoria"
             value={productData.category}
-            onChange={handleInputChange}
+            onChange={(e) => setProductData({ ...productData, category: e.target.value })}
           />
           <Textarea
             name="description"
             placeholder="Descrição"
             value={productData.description}
-            onChange={handleInputChange}
+            onChange={(e) => setProductData({ ...productData, description: e.target.value })}
           />
           <Button title="Salvar" onClick={handleUpdateProduct} />
         </Form>
