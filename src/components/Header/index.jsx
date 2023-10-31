@@ -10,35 +10,40 @@ import { useState } from "react";
 import { Input } from "../Input";
 import Checkbox from "../Checkbox";
 import { api } from "../../services/api";
-
-
-
-
+import { useForm, Controller } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+ 
+const schema = yup
+  .object({
+    name: yup.string().required("Campo obrigatório"),
+    phone: yup.string().required("Campo obrigatório"),
+    email: yup.string().email("Email inválido").required("Campo obrigatório"),
+    password: yup.string().min(5, "A senha deve ter no mínimo 5 caracteres").required("Campo obrigatório"),
+    confPassword: yup.string().min(5, "A senha deve ter no mínimo 5 caracteres").required("Campo obrigatório").oneOf([yup.ref('password'), null],"As senhas não correspondem!")
+  })
+ 
 export function Header() {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [modal, setModal] = useState(false)
+ 
+  const {
+    handleSubmit,
+    formState: { errors },
+    control
+  } = useForm({
+    resolver: yupResolver(schema),
+  })
+ 
+ async function handlesaveUser({confPassword, password, ...rest}){
 
- function handleSaveUser(){
-    if(password !== confirmPassword) {
-      alert("As senhas não correspondem!");
-      return;
-    }
-  
-     api.post("/user" ,{
-      name,
-      phone,
-      email,
-      password
-    });
-  
+    console.log({...rest});
+ 
+     await api.post("/user" , {...rest, password});
+ 
     alert("Cliente cadastrado com sucesso!");
   }
-  
-
+ 
+ 
   const toggleModal = () =>{
     setModal(!modal)
   }
@@ -59,9 +64,9 @@ export function Header() {
       <li> Bebidas </li>
       <li> Não Alimentar </li>
     </ul>
-
+ 
       </Navigation>
-
+ 
       <Options>
        {/*  <StyledCgProfile /> */}
         <button onClick={toggleModal}>
@@ -72,7 +77,7 @@ export function Header() {
          <p>Crie uma conta</p>
         </button>
       </Options>
-
+ 
       {modal && (
         <Modal>
         <Overlay/>        
@@ -96,15 +101,52 @@ export function Header() {
     <Overlay/>        
     <SecondModalContent>
       <h3>Crie sua conta aqui!</h3> <br/>
-      <form>
-        <Input placeholder="Nome completo" type="text" icon={BiSolidUserPin} onChange={e => setName(e.target.value)}/>
-        <Input placeholder="Celular" type="text" icon={BiLogoWhatsappSquare} onChange={e => setPhone(e.target.value)}/>
-        <Input placeholder="E-mail" type="text" icon={FiMail} onChange={e => setEmail(e.target.value)}/>
-        <Input placeholder="Senha" type="password" icon={FiLock} onChange={e => setPassword(e.target.value)}/>
-        <Input placeholder="Confirme sua Senha" type="password" icon={FiLock} onChange={e => setConfirmPassword(e.target.value)}/>
-        
+      <form onSubmit={handleSubmit(handlesaveUser)}>
+ 
+       
+ 
+        <Controller
+          name="name"
+          render={({ field: { onChange, onBlur, value }}) => (
+            <Input placeholder="Nome completo" type="text" icon={BiSolidUserPin} onChange={onChange} onBlur={onBlur} value={value} errors={errors.firstName?.message} />
+          )}
+          control={control}
+        />
+ 
+        <Controller
+          name="phone"
+          render={({ field: { onChange, onBlur, value }}) => (
+            <Input placeholder="Celular" type="text" icon={BiLogoWhatsappSquare} onChange={onChange} onBlur={onBlur} value={value} errors={errors.phone?.message} />
+          )}
+          control={control}
+        />
+ 
+        <Controller
+          name="email"
+          render={({ field: { onChange, onBlur, value }}) => (
+            <Input placeholder="E-mail" type="text" icon={FiMail} onChange={onChange} onBlur={onBlur} value={value} errors={errors.email?.message} />
+          )}
+          control={control}
+        />
+ 
+        <Controller
+          name="password"
+          render={({ field: { onChange, onBlur, value }}) => (
+            <Input placeholder="Senha" type="password" icon={FiLock} onChange={onChange} onBlur={onBlur} value={value} errors={errors.password?.message} />
+          )}
+          control={control}
+        />
+ 
+        <Controller
+          name="confPassword"
+          render={({ field: { onChange, onBlur, value }}) => (
+            <Input placeholder="Confirme sua Senha" type="password" icon={FiLock} onChange={onChange} onBlur={onBlur} value={value} errors={errors.confPassword?.message} />
+          )}
+          control={control}
+        />
+       
         <Checkbox label="Lembrar dados" />
-        <StyledButton onClick={handleSaveUser}>Cadastra-se</StyledButton>
+        <StyledButton>Cadastra-se</StyledButton>
       </form>
       <button onClick={toggleSecondModal}>
         <AiOutlineClose/>
@@ -113,6 +155,6 @@ export function Header() {
   </Modal>
 )}
     </Container>
-      
+     
   );
 }
