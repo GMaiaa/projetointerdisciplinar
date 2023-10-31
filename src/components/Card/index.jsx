@@ -1,12 +1,11 @@
     import { Container } from "./syles";
-    import { api } from "../../services/api";
-    import { useState } from "react";
+
 
     
 
     export function Card({ product }){ 
          if (!product) {
-            return null; // Adicione uma verificação para lidar com o caso em que 'product' seja undefined
+            return null; 
           }
         const { image, name, value } = product;
 

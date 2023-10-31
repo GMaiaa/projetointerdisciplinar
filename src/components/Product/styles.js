@@ -42,14 +42,14 @@ export const Body = styled.div`
 export const Options = styled.div`
   display: flex;
   gap: 10px;
-  > button {
+  >  button {
     background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
   }
 
-  > button:hover {
+  >  button:hover {
     color: #f2a61f;
   }
 `;
