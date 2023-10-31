@@ -35,6 +35,11 @@ export const AboutContent = styled.div`
   > img {
     width: 400px;
   }
+
+  @media (max-width: 360px) {
+    direction: flex;
+    flex-direction: column;
+  }
 `;
 
 export const Section = styled.section`
@@ -63,4 +68,9 @@ margin-top: 40px;
 gap: 50px;
   display: flex;
   flex-direction: row;
+  
+@media (max-width: 360px) {
+  direction: flex;
+  flex-direction: column;
+}
 `

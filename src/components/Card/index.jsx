@@ -10,7 +10,7 @@
           }
         const { image, name, value } = product;
 
-      
+        console.log(product.image)
 
         return(
             <Container>
