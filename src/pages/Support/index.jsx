@@ -40,7 +40,7 @@ export function Support() {
     </Questions>
 
     <Contacts>
-    <SupportContactCard title="Instagram" color="#5851DB"/>
+    <SupportContactCard title="Instagram" color="#C13584"/>
     <SupportContactCard title="Whatsapp" color="#25d366"/>
     <SupportContactCard title="E-mail" color="#db4a39"/>
 

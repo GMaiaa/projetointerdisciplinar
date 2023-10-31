@@ -83,8 +83,6 @@ export function AdminPanel() {
               <Product
                 key={String(product.id)}
                 data={product}
-                // Pass the product ID to the handleUpdateProduct function
-                updateProduct={() => handleUpdateProduct(product.id)}
               />
             ))}
           </Section>

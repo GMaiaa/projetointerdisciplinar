@@ -12,6 +12,9 @@ export function Home() {
   const [fruits, setFruits] = useState([]);
   const [greenerys, setGreenerys] = useState([]);
   const [vegetables, setVegetables] = useState([])
+  const [drinks, setDrinks] = useState([])
+  const [nonFoods, setNonFoods] = useState([])
+  
   
   const navigate = useNavigate();
 
@@ -62,6 +65,36 @@ export function Home() {
       }
     }
     fetchFilteredVegetables();
+  }, []);
+
+  useEffect(() => {
+    async function fetchFilteredDrinks() {
+      try {
+        const response = await api.get("/product", {
+        
+        });
+       const filteredDrinks = response.data.filter((i) => i.category == "Bebida").slice(0, 5)
+        setDrinks(filteredDrinks);
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      }
+    }
+    fetchFilteredDrinks();
+  }, []);
+
+  useEffect(() => {
+    async function fetchFilteredNonFoods() {
+      try {
+        const response = await api.get("/product", {
+        
+        });
+       const filteredNonFoods = response.data.filter((i) => i.category == "Não alimentar").slice(0, 5)
+        setNonFoods(filteredNonFoods);
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      }
+    }
+    fetchFilteredNonFoods();
   }, []);
   return (
     <Container>
@@ -129,31 +162,12 @@ export function Home() {
         <h1>Bebidas</h1>
         <ButtonText title="Ver mais" />
         <Items>
-          <Card
-            name="Água Mineral"
-            value="R$ 2,00"
-            image="https://www.varanda.com.br/media/catalog/product/cache/1/image/1200x/9df78eab33525d08d6e5fb8d27136e95/a/g/agua-mineral-crystal-500ml-7894900530001.jpg"
-          />
-          <Card
-            name="Água c/ Gás"
-            value="R$ 2,50"
-            image="https://www.imigrantesbebidas.com.br/bebida/images/products/full/2894-agua-mineral-crystal-com-gas-500ml.jpg"
-          />
-          <Card
-            name="Suco de Uva"
-            value="R$ 6,50"
-            image="https://18666.cdn.simplo7.net/static/18666/sku/suco-de-uva-tinto-suco-de-uva-aurora-tinto-integral-1-5lts-c-6--p-1624989709204.jpg"
-          />
-          <Card
-            name="Chá Matte"
-            value="R$ 5,00"
-            image="https://res.cloudinary.com/piramides/image/upload/c_fill,h_564,w_395/v1/products/10243-cha-matte-leao-limao-pet-450ml-6un.20230925125505.png?_a=AAAOGGX"
-          />
-          <Card
-            name="Yakult"
-            value="R$ 3,00"
-            image="https://emporiokaminski.com.br/wp-content/uploads/2020/06/yakult-80g.png"
-          />
+        {drinks.map((drink) => (
+              <Card
+                key={String(drink.id)}
+                product = {drink}
+              />
+            ))}
         </Items>
         
       </Section>
@@ -162,31 +176,12 @@ export function Home() {
         <h1>Não Alimentar</h1>
         <ButtonText title="Ver mais" />
         <Items>
-          <Card
-            name=""
-            value="R$ 2,00"
-            image="https://www.varanda.com.br/media/catalog/product/cache/1/image/1200x/9df78eab33525d08d6e5fb8d27136e95/a/g/agua-mineral-crystal-500ml-7894900530001.jpg"
-          />
-          <Card
-            name="Água c/ Gás"
-            value="R$ 2,50"
-            image="https://www.imigrantesbebidas.com.br/bebida/images/products/full/2894-agua-mineral-crystal-com-gas-500ml.jpg"
-          />
-          <Card
-            name="Suco de Uva"
-            value="R$ 6,50"
-            image="https://18666.cdn.simplo7.net/static/18666/sku/suco-de-uva-tinto-suco-de-uva-aurora-tinto-integral-1-5lts-c-6--p-1624989709204.jpg"
-          />
-          <Card
-            name="Chá Matte"
-            value="R$ 5,00"
-            image="https://res.cloudinary.com/piramides/image/upload/c_fill,h_564,w_395/v1/products/10243-cha-matte-leao-limao-pet-450ml-6un.20230925125505.png?_a=AAAOGGX"
-          />
-          <Card
-            name="Yakult"
-            value="R$ 3,00"
-            image="https://conteudo.imguol.com.br/c/noticias/58/2023/07/05/yakult-1688566224560_v2_3x4.jpg"
-          />
+        {nonFoods.map((nonFood) => (
+              <Card
+                key={String(nonFood.id)}
+                product = {nonFood}
+              />
+            ))}
         </Items>
       </Section>
       <Footer />
