@@ -32,6 +32,7 @@ export function AdminPanel() {
   useEffect(() => {
     async function fetchUsers() {
       const response = await api.get("/user");
+      console.log(response);
       setUsers(response.data);
     }
     fetchUsers();
@@ -82,8 +83,6 @@ export function AdminPanel() {
               <Product
                 key={String(product.id)}
                 data={product}
-                // Pass the product ID to the handleUpdateProduct function
-                updateProduct={() => handleUpdateProduct(product.id)}
               />
             ))}
           </Section>

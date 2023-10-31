@@ -8,7 +8,7 @@ import { Container, Form } from "./styles";
 import { Textarea } from "../../components/Textarea";
 import { ButtonText } from "../../components/ButtonText";
 import { api } from "../../services/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export function New() {
@@ -18,6 +18,12 @@ export function New() {
   const [image, setImage] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
+
+  const navigate = useNavigate()
+
+  function backPanel(){
+    navigate("/adminpanel")
+  }
 
 
   async function handleNewProduct(){
@@ -31,6 +37,8 @@ export function New() {
     });
 
     alert("Produto cadastrado com sucesso!");
+    backPanel()
+
   }
 
 
