@@ -37,8 +37,19 @@ export const AboutContent = styled.div`
   }
 
   @media (max-width: 360px) {
+
+    width: 360px;
+
+    > div{
+    width:  250px;
+    }
+
     direction: flex;
     flex-direction: column;
+    > img {
+    display: none;
+    
+  }
   }
 `;
 
@@ -61,6 +72,19 @@ export const Section = styled.section`
   >button{
     margin-left: auto;
   }
+    @media (max-width: 360px) {
+     
+        width: 360px;
+        fle
+      
+        >button{
+          margin-left: 0px;
+        }
+
+      margin: 0;
+      
+      }
+  
 `;
 
 export const Items = styled.div`
