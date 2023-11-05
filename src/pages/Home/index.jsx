@@ -126,7 +126,7 @@ export function Home() {
               <Card
                 key={String(fruit.id)}
                 product = {fruit}
-                onClick={() => handleDetails(fruit.id)}
+                onCardClick={() => handleDetails(fruit.id)}
               />
             ))}
         </Items>
