@@ -140,6 +140,7 @@ export function Home() {
               <Card
                 key={String(greenery.id)}
                 product = {greenery}
+                onCardClick={() => handleDetails(greenery.id)}
               />
             ))}
         </Items>
@@ -153,6 +154,7 @@ export function Home() {
               <Card
                 key={String(vegetable.id)}
                 product = {vegetable}
+                onCardClick={() => handleDetails(vegetable.id)}
               />
             ))}
         </Items>
@@ -166,6 +168,7 @@ export function Home() {
               <Card
                 key={String(drink.id)}
                 product = {drink}
+                onCardClick={() => handleDetails(drink.id)}
               />
             ))}
         </Items>
@@ -180,6 +183,7 @@ export function Home() {
               <Card
                 key={String(nonFood.id)}
                 product = {nonFood}
+                onCardClick={() => handleDetails(nonFood.id)}
               />
             ))}
         </Items>
