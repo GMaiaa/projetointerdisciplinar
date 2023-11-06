@@ -9,6 +9,7 @@ import { Textarea } from "../../components/Textarea";
 import { ButtonText } from "../../components/ButtonText";
 import { api } from "../../services/api";
 import { Link, useNavigate } from "react-router-dom";
+import { Select } from "../../components/Select";
 
 
 export function New() {
@@ -63,10 +64,8 @@ export function New() {
           onChange={e => setImage(e.target.value)}/>
           <Input placeholder="Quantidade em estoque" 
           onChange={e => setAmount(e.target.value)}/>
-          <Input placeholder="Categoria" 
-          onChange={e => setCategory(e.target.value)}/>
-
-          <Textarea placeholder="Descrição" 
+         <Select onChange={e => setCategory(e.target.value)} />
+          <Input placeholder="Descrição" 
           onChange={e => setDescription(e.target.value)}/>
           <Button 
           title="Salvar" 
