@@ -1,12 +1,12 @@
 import React from "react";
 import { Container } from "./styles";
 
-export function Select(props) {
-  const { onChange } = props;
+export function Select({onChange,category}) {
+  
 
   return (
     <Container onChange={onChange}>
-      <option value="none">Categoria</option>
+      <option value="none">{category}</option>
       <option value="Fruta">Fruta</option>
       <option value="Verdura">Verdura</option>
       <option value="Legume">Legume</option>

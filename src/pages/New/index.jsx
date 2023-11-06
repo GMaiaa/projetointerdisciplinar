@@ -42,6 +42,12 @@ export function New() {
 
   }
 
+  function handleValueChange(event) {
+    // Substitui as vírgulas (",") por pontos (".") no valor inserido pelo usuário
+    const newValue = event.target.value.replace(",", ".");
+    setValue(newValue);
+  }
+
 
   return (
     <Container>
@@ -58,13 +64,15 @@ export function New() {
 
           <Input placeholder="Nome do produto" 
           onChange={e=> setName(e.target.value)} />
-          <Input placeholder="R$ 00,00" 
-          onChange={e => setValue(e.target.value)}/>
+          <Input
+            placeholder="R$ 00,00"
+            onChange={handleValueChange} 
+          />
           <Input placeholder="Imagem URL" 
           onChange={e => setImage(e.target.value)}/>
           <Input placeholder="Quantidade em estoque" 
           onChange={e => setAmount(e.target.value)}/>
-         <Select onChange={e => setCategory(e.target.value)} />
+         <Select category="Categoria" onChange={e => setCategory(e.target.value)} />
           <Input placeholder="Descrição" 
           onChange={e => setDescription(e.target.value)}/>
           <Button 

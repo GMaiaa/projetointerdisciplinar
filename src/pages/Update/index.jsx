@@ -41,7 +41,7 @@ export function Update() {
   const handleUpdateProduct = async () => {
     const updatedProduct = {
       name: productData.name,
-      value: productData.value,
+      value: parseFloat(productData.value.replace(",", ".")),
       image: productData.image,
       amount: productData.amount,
       category: productData.category,
@@ -53,6 +53,15 @@ export function Update() {
     alert("Produto Atualizado com sucesso!");
     backPanel()
   };
+
+  const formatValueWithComma = (value) => {
+    if (typeof value === "number") {
+      value = value.toString();
+    }
+    return value.replace(".", ",");
+  };
+
+  
   console.log("productData.description:", productData.description);
   console.log("productData.category:", productData.category);
 
@@ -78,9 +87,13 @@ export function Update() {
           <Input
             name="value"
             placeholder="R$ 00,00"
-            value={productData.value}
+            value={formatValueWithComma(productData.value)}
             onChange={(e) =>
-              setProductData({ ...productData, value: e.target.value })
+              // Converte a vírgula de volta para ponto no estado
+              setProductData({
+                ...productData,
+                value: e.target.value.replace(",", "."),
+              })
             }
           />
           <Input
@@ -100,7 +113,7 @@ export function Update() {
             }
           />
           <Select
-            value={productData.category}
+            category={productData.category}
             onChange={(e) => {
               setProductData({ ...productData, category: e.target.value });
             }}
