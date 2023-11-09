@@ -21,14 +21,16 @@ export const Container = styled.header`
   padding: 0 80px;
 `;
 
-export const Logo = styled.div`
+export const Logo  = styled.div`
 margin-top:10px;
   display: flex;
   align-items: center;
 
-  > img {
+  > a img {
     width: 150px;
   }
+
+
 `;
 
 export const Navigation = styled.nav`
@@ -45,17 +47,22 @@ export const Navigation = styled.nav`
     gap: 80px;
   }
 
-  > ul li {
+  > a{
+    text-decoration: none;
+    list-style: none;
+  }
+
+  >  ul li {
     cursor: pointer;
     position: relative;
   }
 
-  > ul li:hover {
+  >  ul li:hover {
     color: #f2a61f;
     transition: 0.3s;
   }
 
-  > ul li::after {
+  >  ul li::after {
     content: "";
     position: absolute;
     display: block;
@@ -66,7 +73,7 @@ export const Navigation = styled.nav`
     transition: all ease-in-out 250ms;
   }
 
-  > ul li:hover::after {
+  >  ul li:hover::after {
     width: 60%;
   }
 `;

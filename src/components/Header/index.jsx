@@ -54,15 +54,17 @@ export function Header() {
   return (
     <Container>
       <Logo>
-        <img src={LogoImg} alt="Logo da Quitanda Frescor" />
+      
+      <a href="../"> <img src={LogoImg} alt="Logo da Quitanda Frescor" /> </a>
+
       </Logo>
       <Navigation>
     <ul>
-      <li> Frutas </li>
-      <li> Verduras </li>
-      <li> Legumes </li>
-      <li> Bebidas </li>
-      <li> Não Alimentar </li>
+      <a href="#IDfruta"> <li> Frutas </li> </a>
+      <a href="#IDVerdura"><li> Verduras </li> </a>
+      <a href="#IDLegume"><li> Legumes </li> </a>
+      <a href="#IDBebida"><li> Bebidas </li> </a>
+      <a href="#IDseila"><li> Não Alimentar </li> </a>
     </ul>
  
       </Navigation>

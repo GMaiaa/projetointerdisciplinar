@@ -119,7 +119,7 @@ export function Home() {
       </AboutContent>
 
       <Section>
-        <h1>Frutas</h1>
+      <h1 id="IDfruta">Frutas</h1>
         <ButtonText title="Ver mais" />
         <Items>
         {fruits.map((fruit, key) => (
@@ -133,7 +133,7 @@ export function Home() {
       </Section>
 
       <Section>
-        <h1>Verduras</h1>
+        <h1 id="IDVerdura">Verduras</h1>
         <ButtonText title="Ver mais" />
         <Items>
         {greenerys.map((greenery) => (
@@ -147,7 +147,7 @@ export function Home() {
       </Section>
 
       <Section>
-        <h1>Legumes</h1>
+        <h1 id="IDLegume">Legumes</h1>
         <ButtonText title="Ver mais" />
         <Items>
         {vegetables.map((vegetable) => (
@@ -161,7 +161,7 @@ export function Home() {
       </Section>
 
       <Section>
-        <h1>Bebidas</h1>
+        <h1 id="IDBebida">Bebidas</h1>
         <ButtonText title="Ver mais" />
         <Items>
         {drinks.map((drink) => (
@@ -176,7 +176,7 @@ export function Home() {
       </Section>
 
       <Section>
-        <h1>Não Alimentar</h1>
+        <h1 id="IDseila">Não Alimentar</h1>
         <ButtonText title="Ver mais" />
         <Items>
         {nonFoods.map((nonFood) => (
