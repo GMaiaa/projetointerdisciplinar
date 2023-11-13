@@ -7,6 +7,7 @@ import { Update } from '../pages/Update'
 import { Support } from '../pages/Support'
 import { Details } from '../pages/Details'
 import { User } from '../components/User'
+import { Products } from '../pages/AllProducts'
 
 export function AppRoutes() {
     return (
@@ -18,7 +19,7 @@ export function AppRoutes() {
             <Route path="/support" element={<Support />} />
             <Route path="/details/:id" element={<Details/>}/>
             <Route path="/users" element={<User />} />
-
+            <Route path="/products" element={<Products/>}/>
         </Routes>
     )
 }
