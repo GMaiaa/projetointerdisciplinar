@@ -15,7 +15,7 @@ import { Section } from "../../components/Section";
 import { Product } from "../../components/Product";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function AdminPanel() {
   const [products, setProducts] = useState([]);
@@ -80,9 +80,8 @@ export function AdminPanel() {
     minutesFormatted =
       minutesFormatted.length == 1 ? `0${minutesFormatted}` : minutesFormatted;
 
-    return `${dateFormatted.getDate()}/${monthFormatted} às ${
-      dateFormatted.getHours() - 3
-    }h${minutesFormatted}`;
+    return `${dateFormatted.getDate()}/${monthFormatted} às ${dateFormatted.getHours() - 3
+      }h${minutesFormatted}`;
   }
 
   return (
@@ -138,31 +137,31 @@ export function AdminPanel() {
                 </tr>
               </thead>
               <tbody className="order">
-                {orders &&
-                  orders.map((order) => (
-                    <tr key={String(order.id)}>
-                      <td>
-                        <select
-                          defaultValue={order.status}
-                          onChange={(event) => handleOrderStatus(order, event)}
-                        >
-                          <option value="🟡 Pendente">🟡 Pendente</option>
-                          <option value="🟠 Preparando">🟠 Preparando</option>
-                          <option value="🟢 Entregue">🟢 Entregue</option>
-                          <option value="🔴 Cancelado">🔴 Cancelado</option>
-                        </select>
-                      </td>
-                      <td>0000{order.id}</td>
-                      <td>
-                        {order.items.map((item) => (
-                          <span key={item.productName}>
-                            {item.quantity} x {item.productName} ,{" "}
-                          </span>
-                        ))}
-                      </td>
-                      <td>{formatDate(order.orderDate)}</td>
-                    </tr>
-                  ))}
+                {orders?.map((order) => (
+                  <tr key={String(order.id)}>
+                    <td>
+                      <select
+                        defaultValue={order.status}
+                        onChange={(event) => handleOrderStatus(order, event)}
+                      >
+                        <option value="🟡 Pendente">🟡 Pendente</option>
+                        <option value="🟠 Preparando">🟠 Preparando</option>
+                        <option value="🟢 Entregue">🟢 Entregue</option>
+                        <option value="🔴 Cancelado">🔴 Cancelado</option>
+                      </select>
+                    </td>
+                    <td>0000{order.id}</td>
+                    <td>
+                      {order.items?.map((item, index) => (
+                        <span key={item.productName}>
+                          {item.quantity} x {item.productName}
+                          {index < order.items.length - 1 ? ', ' : ''}
+                        </span>
+                      ))}
+                    </td>
+                    <td>{formatDate(order.orderDate)}</td>
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </Section>

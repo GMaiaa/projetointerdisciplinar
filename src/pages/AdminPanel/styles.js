@@ -98,10 +98,10 @@ export const Table = styled.table`
         border-radius: 0.8rem;
         border-collapse: collapse;
 
-
+        text-align: center;
 
         font-size: 14px;
-        color: black;
+        color: #050505;
 
      th {
         position: sticky;
@@ -112,8 +112,9 @@ export const Table = styled.table`
         border-bottom: 2px solid  #f2a61f;
         
         text-align: left;
-        color: black;
+        color: #050505;
         background:  #f2a61f;
+        text-align: center;
     }
 
      th:first-child {
@@ -147,6 +148,7 @@ export const Table = styled.table`
     table td {
         height: 80px;
         padding: 16px 24px;
+        
     }
 
      th:nth-child(-n+3),
@@ -154,12 +156,16 @@ export const Table = styled.table`
         border-right: 2px solid  #f2a61f;
     }
 
-    select {
-        max-width: 175px;
-        background: white;
+    tr:hover {
+    background-color: #f2f2f2;
+    }
 
+    select {
+        width: 175px;
+        background: white;
         
-        border: 1px solid black;
+        
+        border: none;
 
         padding: 13px 16px;
     }`
