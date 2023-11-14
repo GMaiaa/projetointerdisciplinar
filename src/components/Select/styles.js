@@ -1,15 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.select`
-  :root {
-    --arrow-bg: rgba(255, 255, 255, 0.3);
 
-    --option-bg: white;
-    --select-bg: rgba(255, 255, 255, 0.2);
-  }
-  > * {
-    box-sizing: border-box;
-  }
   > body {
     display: grid;
     place-items: center;
@@ -19,8 +11,7 @@ export const Container = styled.select`
   margin-bottom: 8px;
   appearance: none;
   border: 0;
-  outline: 0;
-  font: inherit;
+
   /* Personalize */
   width: 100%;
   padding: 1rem 4rem 1rem 1rem;
@@ -28,6 +19,7 @@ export const Container = styled.select`
       no-repeat right 0.8em center / 1.4em,
     linear-gradient(to left, #f2a61f 3em, #f5f5fa 3em);
     color: #424244;
+    font-size: 16px;
   border-radius: 10px;
   cursor: pointer;
   /* Remove IE arrow */
@@ -41,6 +33,7 @@ export const Container = styled.select`
   /* <option> colors */
   > option {
     color: inherit;
+    font-size: 16px;
     background-color: #f5f5fa;
   }
 `;
