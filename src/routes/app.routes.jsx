@@ -6,7 +6,6 @@ import { Home } from "../pages/Home"
 import { Update } from '../pages/Update'
 import { Support } from '../pages/Support'
 import { Details } from '../pages/Details'
-import { User } from '../components/User'
 import { Cart } from '../pages/Cart'
 import { Products } from '../pages/AllProducts'
 
@@ -20,7 +19,6 @@ export function AppRoutes() {
             <Route path="/update/:id" element={<Update />} />
             <Route path="/support" element={<Support />} />
             <Route path="/details/:id" element={<Details/>}/>
-            <Route path="/users" element={<User />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/products" element={<Products/>}/>
         </Routes>

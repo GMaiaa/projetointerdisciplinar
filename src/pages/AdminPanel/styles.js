@@ -84,3 +84,82 @@ cursor: pointer;
   }
 
 `
+export const Table = styled.table`
+        display: block;
+        overflow: auto;
+        overflow: overlay;
+        white-space: nowrap;
+        
+        width: 100%;
+        max-height: 544px;
+        margin-top: 35px;
+        
+        border: 2px solid  #f2a61f;
+        border-radius: 0.8rem;
+        border-collapse: collapse;
+
+
+
+        font-size: 14px;
+        color: black;
+
+     th {
+        position: sticky;
+        top: 0px;
+
+        height: 64px;
+        padding: 21px 24px;
+        border-bottom: 2px solid  #f2a61f;
+        
+        text-align: left;
+        color: black;
+        background:  #f2a61f;
+    }
+
+     th:first-child {
+        width: 223px;
+    }
+
+     th:nth-child(2) {
+        width: 151px;
+    }
+
+     th:nth-child(3) {
+        width: 605px;
+    }
+
+     th:last-child {
+        width: 151px;
+    }
+
+     tr {
+        border-bottom: 2px solid  #f2a61f;
+    }
+
+     tr:nth-child(even) {
+        background:  #f2a61f;
+    }
+
+     tr:last-child {
+        border-bottom: none;
+    }
+
+    table td {
+        height: 80px;
+        padding: 16px 24px;
+    }
+
+     th:nth-child(-n+3),
+     td:nth-child(-n+3) {
+        border-right: 2px solid  #f2a61f;
+    }
+
+    select {
+        max-width: 175px;
+        background: white;
+
+        
+        border: 1px solid black;
+
+        padding: 13px 16px;
+    }`
