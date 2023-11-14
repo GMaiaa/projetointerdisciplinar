@@ -17,6 +17,7 @@ import { api } from "../../services/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export function AdminPanel() {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -68,6 +69,18 @@ export function AdminPanel() {
     await api.put(`/order/updateOrderStatus/${order.id}`, cart);
     location.reload();
   }
+
+  const handleRowClick = async (orderId) => {
+    try {
+      const response = await api.get(`/order/getOrderById/${orderId}`);
+      const order = response.data;
+
+      // Agora você tem os detalhes do pedido e pode fazer o que quiser com eles
+      console.log(order);
+    } catch (error) {
+      console.log(error.response)('Ocorreu um erro ao buscar os detalhes do pedido:', error);
+    }
+  };
 
   function formatDate(date) {
     const dateFormatted = new Date(date);
@@ -141,7 +154,7 @@ export function AdminPanel() {
               </thead>
               <tbody className="order">
                 {orders?.map((order) => (
-                  <tr key={String(order.id)}>
+                  <tr key={String(order.id)} onClick={() => handleRowClick(order.id)}>
                     <td>
                       <select
                         defaultValue={order.status}

@@ -135,6 +135,7 @@ export const Table = styled.table`
 
      tr {
         border-bottom: 2px solid  #f2a61f;
+        cursor: pointer;
     }
 
      tr:nth-child(even) {
