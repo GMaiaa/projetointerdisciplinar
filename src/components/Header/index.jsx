@@ -14,24 +14,24 @@ import { api } from "../../services/api";
 import { useForm, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { Link } from "react-router-dom";
+import { Link, animateScroll as scroll } from "react-scroll";
+
  
  
 export function Header() {
   return (
     <Container>
       <Logo>
-        <img src={LogoImg} alt="Logo da Quitanda Frescor" />
+        <a href="../"> <img src={LogoImg} alt="Logo da Quitanda Frescor" /> </a>
       </Logo>
-      <Navigation>
-    <ul>
-      <li> Frutas </li>
-      <li> Verduras </li>
-      <li> Legumes </li>
-      <li> Bebidas </li>
-      <li> Não Alimentar </li>
-    </ul>
- 
+      <Navigation>  
+        <ul>
+          <Link to="IDfruta" smooth={true} duration={500}> <li> Frutas </li> </Link>
+          <Link to="IDVerdura" smooth={true} duration={500}><li> Verduras </li> </Link>
+          <Link to="IDLegume" smooth={true} duration={500}><li> Legumes </li> </Link>
+          <Link to="IDBebida" smooth={true} duration={500}><li> Bebidas </li> </Link>
+          <Link to="IDseila" smooth={true} duration={500}><li> Não Alimentar </li> </Link>
+        </ul>
       </Navigation>
  
       <Options>
