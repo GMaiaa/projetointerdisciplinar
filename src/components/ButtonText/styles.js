@@ -6,4 +6,9 @@ export const Container = styled.button`
 
     border: none;
     font-size: 16px;
+
+    ${props => props.isAdminPanel && `
+    font-size: 22px; /* Aumenta o tamanho da fonte */
+    margin-top: 20px; /* Move o botão para baixo */
+  `}
 `

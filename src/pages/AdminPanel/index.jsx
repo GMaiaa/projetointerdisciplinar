@@ -84,6 +84,7 @@ export function AdminPanel() {
       }h${minutesFormatted}`;
   }
 
+
   return (
     <Container>
       <Logo>
@@ -95,9 +96,10 @@ export function AdminPanel() {
       <Menu>
         <li>
           <ButtonText
-            title="Todos"
+            title="Produtos"
             onClick={() => handleSectionSelected("Estoque")} // Show Estoque section
             isActive={activeSection === "Estoque"}
+            isAdminPanel={true}
           />
         </li>
         <li>
@@ -105,13 +107,14 @@ export function AdminPanel() {
             title="Pedidos"
             onClick={() => handleSectionSelected("Pedidos")} // Show Clientes section
             isActive={activeSection === "Pedidos"}
+            isAdminPanel={true}
           />
         </li>
       </Menu>
 
       <Search>
         <Input
-          placeholder="Pesquisar pelo título"
+          placeholder="Pesquisar pelo nome do produto"
           icon={FiSearch}
           onChange={(e) => setSearch(e.target.value)}
         />
