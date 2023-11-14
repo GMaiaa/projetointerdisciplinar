@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-
+  
   display: grid;
   grid-template-rows: 105px auto;
   grid-template-areas:
@@ -14,6 +14,7 @@ export const Container = styled.div`
   > main {
     grid-area: content;
     padding: 64px 0;
+    
   }
 `;
 
@@ -43,7 +44,7 @@ export const Button = styled.button`
 export const Content = styled.div`
    max-width: 1300px;
   margin: 0 auto;
-
+  
   display: flex;
   flex-direction: row;
   gap: 300px;

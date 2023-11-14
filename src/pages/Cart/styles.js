@@ -9,6 +9,7 @@ export const Content = styled.div`
   display: flex;
   margin-left: 220px;
   align-items: center;
+  padding-top:150px;
 
   
 `;
