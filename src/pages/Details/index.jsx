@@ -78,8 +78,8 @@ export function Details() {
               urlImage="https://hortifruti.com.br/media/catalog/product/cache/e43ef0ed2520a1b4f5eb0225d3cc2507/1/0/100128---2116220000008---espinafre.jpg?auto=webp&format=pjpg&width=160&height=200&fit=cover"
             />
           </Items>
-        </More>
         <Footer />
+        </More>
     </Container>
   );
 }
