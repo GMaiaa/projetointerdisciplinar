@@ -1,4 +1,12 @@
-import { Container, Logo, Menu, Search, Content, NewItem, Table } from "./styles";
+import {
+  Container,
+  Logo,
+  Menu,
+  Search,
+  Content,
+  NewItem,
+  Table,
+} from "./styles";
 import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
 import { Input } from "../../components/Input";
@@ -8,7 +16,6 @@ import { Product } from "../../components/Product";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 
 export function AdminPanel() {
   const [products, setProducts] = useState([]);
@@ -66,14 +73,17 @@ export function AdminPanel() {
     const dateFormatted = new Date(date);
 
     let monthFormatted = (dateFormatted.getMonth() + 1).toString();
-    monthFormatted = monthFormatted.length == 1 ? `0${monthFormatted}` : monthFormatted;
+    monthFormatted =
+      monthFormatted.length == 1 ? `0${monthFormatted}` : monthFormatted;
 
     let minutesFormatted = dateFormatted.getMinutes().toString();
-    minutesFormatted = minutesFormatted.length == 1 ? `0${minutesFormatted}` : minutesFormatted;
+    minutesFormatted =
+      minutesFormatted.length == 1 ? `0${minutesFormatted}` : minutesFormatted;
 
     return `${dateFormatted.getDate()}/${monthFormatted} às ${
-        dateFormatted.getHours() - 3 }h${minutesFormatted}`;
-    }
+      dateFormatted.getHours() - 3
+    }h${minutesFormatted}`;
+  }
 
   return (
     <Container>
@@ -119,6 +129,14 @@ export function AdminPanel() {
         {activeSection === "Pedidos" && (
           <Section title="Pedidos">
             <Table>
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Código</th>
+                  <th>Detalhamento</th>
+                  <th>Data e hora</th>
+                </tr>
+              </thead>
               <tbody className="order">
                 {orders &&
                   orders.map((order) => (

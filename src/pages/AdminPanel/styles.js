@@ -117,7 +117,7 @@ export const Table = styled.table`
     }
 
      th:first-child {
-        width: 223px;
+        width: 150px;
     }
 
      th:nth-child(2) {
@@ -125,11 +125,11 @@ export const Table = styled.table`
     }
 
      th:nth-child(3) {
-        width: 605px;
+        width:1000px;
     }
 
      th:last-child {
-        width: 151px;
+        width: 250px;
     }
 
      tr {
