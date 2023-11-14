@@ -39,26 +39,39 @@ export function Update() {
   }, []);
 
   const handleUpdateProduct = async () => {
-    const updatedProduct = {
-      name: productData.name,
-      value: parseFloat(productData.value.replace(",", ".")),
-      image: productData.image,
-      amount: productData.amount,
-      category: productData.category,
-      description: productData.description,
-    };
-
-    await api.put(`/product/${id}`, updatedProduct);
-
-    alert("Produto Atualizado com sucesso!");
-    backPanel()
-  };
-
-  const formatValueWithComma = (value) => {
-    if (typeof value === "number") {
-      value = value.toString();
+    // Validação dos dados
+    if (!productData.name || !productData.value || !productData.amount) {
+      alert("Por favor, preencha todos os campos obrigatórios.");
+      return;
     }
-    return value.replace(".", ",");
+  
+    try {
+      const updatedProduct = {
+        name: productData.name,
+        // Ensure that productData.value is a string before calling replace
+        value: parseFloat(String(productData.value).replace(",", ".")),
+        image: productData.image,
+        amount: productData.amount,
+        category: productData.category,
+        description: productData.description,
+      };
+  
+      await api.put(`/product/${id}`, updatedProduct);
+  
+      alert("Produto Atualizado com sucesso!");
+      backPanel();
+    } catch (error) {
+      console.error("Erro ao atualizar o produto:", error);
+      alert("Erro ao atualizar o produto. Tente novamente.");
+    }
+  };
+  
+  const formatValueWithComma = (value) => {
+    // Ensure that value is a string before calling replace
+    if (typeof value === "number") {
+      return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+    return String(value).replace(".", ",");
   };
 
   

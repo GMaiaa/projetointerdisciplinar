@@ -14,6 +14,11 @@ export function Details() {
 
   const params = useParams();
 
+  function HandleAddItem(){
+    api.get(`/cart/addCart/${params.id}`);
+    alert("Pedido adicionado ao carrinho!")
+  }
+
   useEffect(() => {
     async function fetchProduct() {
       const response = await api.get(`/product/${params.id}`);
@@ -38,7 +43,7 @@ export function Details() {
           currency: 'BRL',
           minimumFractionDigits: 2,
         })}</p>
-            <button>Adicionar ao carrinho</button>
+            <button onClick={HandleAddItem}>Adicionar ao carrinho</button>
             <p>Descrição:</p><Description>{data.description}</Description>
           </Info>
         </Content>

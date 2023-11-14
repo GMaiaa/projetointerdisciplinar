@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { CgProfile } from 'react-icons/cg';
+import { Link } from "react-router-dom";
 
 export const Container = styled.header`
   grid-area: header;
@@ -71,11 +72,13 @@ export const Navigation = styled.nav`
   }
 `;
 
+
+
 export const Options = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 30px;
   height: 80px;
 
 
@@ -209,7 +212,15 @@ export const StyledButton = styled.button`
   }
 `;
 
+export const OptionButton = styled(Link)`
+  font-size: 30px;
+  color: #17171f;
+  transition: 0.2s ease-in-out;
 
-
-
-
+  &:hover{
+    color: #f2a61f;
+    box-shadow: rgba(255, 172, 28, 0.199) 5px;
+    
+  }
+  
+`;
