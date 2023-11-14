@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
+
 export function Home() {
   const [fruits, setFruits] = useState([]);
   const [greenerys, setGreenerys] = useState([]);

@@ -19,6 +19,8 @@ export const Container = styled.header`
   display: flex;
   justify-content: space-between;
 
+  position: fixed;
+
   padding: 0 80px;
 `;
 
@@ -56,6 +58,7 @@ export const Navigation = styled.nav`
   >  ul li {
     cursor: pointer;
     position: relative;
+    color: #212427;
   }
 
   >  ul li:hover {
