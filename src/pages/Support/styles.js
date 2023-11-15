@@ -8,6 +8,7 @@ export const AboutSupport = styled.div`
   padding-top: 160px;
   display: flex;
   align-items: center;
+  align-items: flex-start; // Adicione esta linha
   justify-content: space-between;
 
   > div {

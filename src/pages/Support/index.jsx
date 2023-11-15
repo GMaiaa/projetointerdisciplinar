@@ -9,14 +9,25 @@ import { Card } from "../../components/Card";
 import { ButtonText } from "../../components/ButtonText";
 import { SupportContactCard } from "../../components/SupportContactCard";
 import { SupportCard } from "../../components/SupportCard";
-import {AiFillInstagram} from "react-icons/ai"
+import { AiFillInstagram } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 
 export function Support() {
+
+
+  const navigate = useNavigate();
+
+  function backHome() {
+    navigate("/");
+  }
+
+
   return (
     <Container>
       <Header />
       <AboutSupport>
+        <ButtonText title="Voltar" onClick={backHome} style={{ fontSize: '20px' }} />
         <img
           src={Undraw}
           alt="Ilustração de um homem com um carrinho de compras"
@@ -32,19 +43,19 @@ export function Support() {
         </div>
       </AboutSupport>
 
-    <Questions>
+      <Questions>
         <SupportCard image={Troca} title="Política de Troca / Estorno" description="Saiba detalhes de trocas e estornos de um produto." />
         <SupportCard image={Pagamento} title="Formas de pagamento" description="Saiba as formas de pagamentos que aceitamos no momento da entrega" />
-        <SupportCard image={Info} title="Informações da loja" description="Informações como endereço, horario de funcionamento e muito mais "/>
+        <SupportCard image={Info} title="Informações da loja" description="Informações como endereço, horario de funcionamento e muito mais " />
 
-    </Questions>
+      </Questions>
 
-    <Contacts>
-    <SupportContactCard title="Instagram" color="#C13584"/>
-    <SupportContactCard title="Whatsapp" color="#25d366"/>
-    <SupportContactCard title="E-mail" color="#db4a39"/>
+      <Contacts>
+        <SupportContactCard title="Instagram" color="#C13584" />
+        <SupportContactCard title="Whatsapp" color="#25d366" />
+        <SupportContactCard title="E-mail" color="#db4a39" />
 
-    </Contacts>
+      </Contacts>
 
 
       <Footer />
