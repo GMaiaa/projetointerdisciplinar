@@ -28,7 +28,7 @@ import { AlternativeButton } from "../../components/AlternativeButton";
 import { api } from "../../services/api";
 import { Item } from "../../components/Item";
 import { useNavigate } from "react-router-dom";
-import { ButtonText } from "../../components/ButtonText";
+
 
 export function Cart() {
   const [client, setClient] = useState("");
@@ -131,7 +131,6 @@ export function Cart() {
       <Header />
       <Content>
         <AboutOrder>
-          <ButtonText title="Voltar" onClick={backHome} style={{ fontSize: '20px' }} />
           <Order>
             <h1>Meu Pedido</h1>
             <ItemsCart>

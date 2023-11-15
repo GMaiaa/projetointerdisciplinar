@@ -125,7 +125,7 @@ export const Select = styled.select`
 
 export const Order = styled.div`
   grid-area: order;
-  margin: 34px 0 0 60px;
+  margin: 34px 0 0 100px;
 
   > h1 {
     font-size: 30px;

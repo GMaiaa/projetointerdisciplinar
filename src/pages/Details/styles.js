@@ -51,6 +51,7 @@ export const Content = styled.div`
 
   > img {
     max-width: 450px; /* Defina o tamanho máximo desejado */
+    margin-left: 60px;
   } /* Transforma o contêiner em um contêiner flex */
 `;
 

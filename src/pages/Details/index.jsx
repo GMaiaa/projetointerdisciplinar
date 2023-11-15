@@ -8,12 +8,19 @@ import { Items } from "../../pages/Home/styles";
 import { Item } from "../../components/Item"
 import { useParams } from 'react-router-dom';
 import { api } from '../../services/api';
+import { ButtonText } from "../../components/ButtonText";
+import { useNavigate } from "react-router-dom";
 
 export function Details() {
   const [data, setData] = useState(null);
   const [additionalProducts, setAdditionalProducts] = useState([]);
-
   const params = useParams();
+
+  const navigate = useNavigate();
+
+  function backHome() {
+    navigate("/");
+  }
 
   function HandleAddItem(id) {
     console.log(`Adicionando produto ${id} ao carrinho`);
@@ -53,9 +60,9 @@ export function Details() {
   return (
     <Container>
       <Header />
-
       {data && (
         <main>
+          <ButtonText title="Voltar" onClick={backHome} style={{ fontSize: '20px', marginLeft: '130px' }} />
           <Content>
             <img src={data.image} />
             <Info>
