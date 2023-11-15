@@ -17,7 +17,9 @@ export function Details() {
 
   function HandleAddItem(id) {
     console.log(`Adicionando produto ${id} ao carrinho`);
-    api.get(`/cart/addCart/${id}`);
+    api.get(`/cart/addCart/${id}`, {
+      data: { id: id }
+    });
     window.alert("Produto adicionado ao carrinho!")
   }
 

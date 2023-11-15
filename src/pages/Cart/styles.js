@@ -6,18 +6,17 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  display: flex;
-  margin-left: 220px;
-  align-items: center;
-  padding-top:150px;
-
-  
+ display: flex;
+ margin-left: 220px;
+ align-items: flex-start;
+ padding-top:150px;
 `;
 
 export const AboutOrder = styled.div`
-  width: 1200px;
-  justify-content: space-between;
-  display: flex;
+ width: 1200px;
+ justify-content: flex-start;
+ align-items: flex-start;
+ display: flex;
 `;
 
 export const TotalValue = styled.p`
@@ -126,7 +125,7 @@ export const Select = styled.select`
 
 export const Order = styled.div`
   grid-area: order;
-  margin: 34px 0 0 120px;
+  margin: 34px 0 0 60px;
 
   > h1 {
     font-size: 30px;
@@ -143,16 +142,17 @@ export const ItemsCart = styled.div`
 `;
 
 export const Info = styled.div`
-  margin-top: 34px;
-  width: 340px;
-  grid-area: info;
+ margin-top: 34px;
+ width: 340px;
+ grid-area: info;
+ margin-left: auto;
 
-  > h1 {
-    font-size: 30px;
-    font-family: "Poppins", sans-serif;
-    color: #f2a61f;
-    font-weight: bold;
-  }
+ > h1 {
+   font-size: 30px;
+   font-family: "Poppins", sans-serif;
+   color: #f2a61f;
+   font-weight: bold;
+ }
 `;
 
 export const Form = styled.form`

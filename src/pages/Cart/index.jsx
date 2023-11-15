@@ -28,6 +28,7 @@ import { AlternativeButton } from "../../components/AlternativeButton";
 import { api } from "../../services/api";
 import { Item } from "../../components/Item";
 import { useNavigate } from "react-router-dom";
+import { ButtonText } from "../../components/ButtonText";
 
 export function Cart() {
   const [client, setClient] = useState("");
@@ -65,9 +66,9 @@ export function Cart() {
       phoneNumber,
       paymentMethod: deliveryMethod === "delivery" ? paymentMethod : null,
     });
-      
+
     try {
-      
+
       await api.post("/cart/confirmPurchase", {
         client,
         cpf,
@@ -77,20 +78,22 @@ export function Cart() {
         phoneNumber,
         paymentMethod: deliveryMethod === "delivery" ? paymentMethod : null,
       },);
-  
+
       alert("Pedido realizado com sucesso!");
       backHome();
     } catch (error) {
       console.error("Erro ao finalizar o pedido:", error.response);
-      
+
       if (error.response) {
         console.error("Status do erro:", error.response.status);
         console.error("Dados do erro:", error.response.data);
       }
-  
+
       alert("Erro ao finalizar o pedido. Por favor, tente novamente.");
     }
   }
+
+
 
 
 
@@ -99,10 +102,10 @@ export function Cart() {
       try {
         const response = await api.get("/cart/getAllCartItems");
         console.log(response);
-  
+
         if (response.data && response.data.items) {
           setItems(response.data.items);
-  
+
           // Verifique se 'response.data.totalValue' existe antes de atualizar o estado
           if (response.data.totalValue !== undefined) {
             setTotalValue(response.data.totalValue);
@@ -116,10 +119,10 @@ export function Cart() {
         console.error("Erro ao buscar itens do carrinho:", error);
       }
     }
-  
+
     // Chame updateTotalValue sempre que o componente for montado
 
-  
+
     fetchItems();
   }, []);
 
@@ -128,6 +131,7 @@ export function Cart() {
       <Header />
       <Content>
         <AboutOrder>
+          <ButtonText title="Voltar" onClick={backHome} style={{ fontSize: '20px' }} />
           <Order>
             <h1>Meu Pedido</h1>
             <ItemsCart>
@@ -135,16 +139,16 @@ export function Cart() {
                 items.map((item) => (
                   <ItemCart key={String(item.id)} data={item} />
                 ))
-                
+
               ) : (
                 <p>Nenhum item no carrinho</p>
               )}
               <TotalValue>{totalValue.toLocaleString("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-          minimumFractionDigits: 2,
-        })}</TotalValue>
-             
+                style: "currency",
+                currency: "BRL",
+                minimumFractionDigits: 2,
+              })}</TotalValue>
+
             </ItemsCart>
           </Order>
           <Info>
@@ -217,7 +221,7 @@ export function Cart() {
                 </>
               )}
               <Button title="Finalizar Pedido" onClick={handleFinishOrder} />
-              <AlternativeButton title="Continuar comprando" onClick={backHome}/>
+              <AlternativeButton title="Continuar comprando" onClick={backHome} />
             </Form>
           </Info>
         </AboutOrder>
