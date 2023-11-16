@@ -44,6 +44,34 @@ export function Cart() {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
+  function handleCpfChange(value) {
+    // Remove todos os caracteres não numéricos
+    let cpf = value.replace(/\D/g, "");
+
+    // Limita a entrada para 11 dígitos
+    cpf = cpf.slice(0, 11);
+
+    // Formata o CPF
+    cpf = formatCpf(cpf);
+
+    setCpf(cpf);
+  }
+
+  function formatCpf(value) {
+    // Remove todos os caracteres não numéricos
+    let cpf = value.replace(/\D/g, "");
+
+
+    // Adiciona um ponto após o terceiro e o sexto dígitos
+    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+
+    // Adiciona um hífen após o nono dígito
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+    return cpf;
+  }
+
   function backHome() {
     navigate("/");
   }
@@ -92,10 +120,6 @@ export function Cart() {
       alert("Erro ao finalizar o pedido. Por favor, tente novamente.");
     }
   }
-
-
-
-
 
   useEffect(() => {
     async function fetchItems() {
@@ -161,7 +185,8 @@ export function Cart() {
               <Input
                 placeholder="CPF"
                 icon={BiSolidUser}
-                onChange={(e) => setCpf(e.target.value)}
+                value={cpf}
+                onChange={(e) => handleCpfChange(e.target.value)}
               />
               <Input
                 placeholder="E-mail"
@@ -171,7 +196,7 @@ export function Cart() {
               <Input
                 placeholder="Celular"
                 icon={BiSolidPhone}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={(e) => setPhoneNumber(formatPhoneNumber(e.target.value))}
               />
               <RadioContainer>
                 <label>

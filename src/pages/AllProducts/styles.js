@@ -14,6 +14,7 @@ export const Container = styled.div`
   > main {
     grid-area: content;
     padding: 64px 0;
+    
   }
 `;
 
@@ -114,14 +115,14 @@ export const CardContainer = styled.div`
 `;
 
 export const ImageStyle = {
-    width: '70px',
-    margin: '10px'
-  };
+  width: '70px',
+  margin: '10px'
+};
 
-  export const TitleContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  };
-  
+export const TitleContainer = {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center'
+};
+

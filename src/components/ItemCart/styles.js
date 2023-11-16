@@ -1,5 +1,5 @@
 import styled from "styled-components";
- 
+
 export const Container = styled.div`
 width: 405px;
 height: 105px;
@@ -48,4 +48,23 @@ gap: 10px;
     border: 2px solid;
     border-radius: 5px;
 }
+
+> button {
+    width: 30px;
+    height: 30px;
+    background-color: #008000; /* Verde natural */
+    color: white; /* Ícones + e - brancos */
+    border: none;
+    border-radius: 5px; /* Bordas suaves */
+    font-size: 20px; /* Linhas mais grossas para os ícones + e - */
+    font-weight: bold; /* Linhas mais grossas para os ícones + e - */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:disabled {
+      background-color: #808080; /* Cinza quando desativado */
+      cursor: not-allowed; /* Cursor não clicável quando desativado */
+    }
+  }
 `

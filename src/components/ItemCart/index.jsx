@@ -10,7 +10,7 @@ export function ItemCart({ data, ...rest }) {
   const navigate = useNavigate();
 
 
-  
+
   function HandleDeleteItem() {
     const confirm = window.confirm(
       `Deseja realmente remover o produto ${data.productName} do carrinho?`
@@ -39,9 +39,9 @@ export function ItemCart({ data, ...rest }) {
         setQuantity(newQuantity);
         // Atualiza o subtotal localmente sem recarregar a página
         setSubtotal(data.productValue * newQuantity);
-        
+
         window.location.reload();
-        
+
       })
       .catch((error) => {
         console.error("Erro ao atualizar quantidade:", error);
@@ -52,11 +52,14 @@ export function ItemCart({ data, ...rest }) {
     <Container>
       <img src={data.productImage} />
       <Title>
-        <input
-          type="number"
-          value={quantity}
-          onChange={(e) => handleUpdateQuantity(e.target.value)}
-        />
+        <button
+          disabled={quantity === 1}
+          onClick={() => handleUpdateQuantity(quantity - 1)}
+        >
+          -
+        </button>
+        <span>{quantity}</span>
+        <button onClick={() => handleUpdateQuantity(quantity + 1)}>+</button>
         <h1>{data.productName}</h1>
       </Title>
       <p>
