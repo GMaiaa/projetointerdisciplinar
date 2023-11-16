@@ -114,6 +114,7 @@ export const CardContainer = styled.div`
   justify-content: space-around;
   margin-left:100px;
   margin-right:100px;
+  margin-top: 150px;
 `;
 
 export const ImageStyle = styled.img `

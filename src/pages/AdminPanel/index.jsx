@@ -166,7 +166,7 @@ export function AdminPanel() {
                 </tr>
               </thead>
               <tbody className="order">
-                {orders?.map((order) => (
+                {Array.isArray(orders) && orders.map((order) => (
                   <tr key={String(order.id)} onClick={() => handleRowClick(order.id)}>
                     <td>
                       <select
