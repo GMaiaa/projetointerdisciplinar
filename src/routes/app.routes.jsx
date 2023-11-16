@@ -7,7 +7,12 @@ import { Update } from '../pages/Update'
 import { Support } from '../pages/Support'
 import { Details } from '../pages/Details'
 import { Cart } from '../pages/Cart'
-import { Products } from '../pages/AllProducts'
+import { Fruits } from '../pages/AllProducts/fruits'
+import { Vegetables } from '../pages/AllProducts/vegetables'
+import { Greenerys } from '../pages/AllProducts/greenerys'
+import { Drink } from '../pages/AllProducts/drink'
+import { NonFood } from '../pages/AllProducts/nonFood'
+
 
 
 export function AppRoutes() {
@@ -20,7 +25,13 @@ export function AppRoutes() {
             <Route path="/support" element={<Support />} />
             <Route path="/details/:id" element={<Details/>}/>
             <Route path="/cart" element={<Cart />} />
-            <Route path="/products" element={<Products/>}/>
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/fruits" element={<Fruits/>}/>
+            <Route path="/vegetables" element={<Vegetables/>}/>
+            <Route path="/greenerys" element={<Greenerys/>}/>
+            <Route path="/drinks" element={<Drink/>}/>
+            <Route path="/nonfoods" element={<NonFood/>}/>
+
         </Routes>
     )
 }
