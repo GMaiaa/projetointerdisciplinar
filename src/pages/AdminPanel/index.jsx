@@ -62,12 +62,25 @@ export function AdminPanel() {
   async function handleOrderStatus(order, event) {
     let statusSelected = event.target.value;
 
+    if (statusSelected === "🔴 Cancelado") {
+      const confirmCancel = window.confirm("Tem certeza de que deseja cancelar este pedido?");
+      if (!confirmCancel) {
+        return; // Se o usuário clicar em "Não", não faça nada
+      }
+    }
+
     const cart = {
       status: statusSelected,
     };
 
     await api.put(`/order/updateOrderStatus/${order.id}`, cart);
-    location.reload();
+
+    if (statusSelected === "🔴 Cancelado") {
+      order.status = "🔴 Cancelado"; // Atualize o status do pedido localmente para "Cancelado"
+      setOrders([...orders]); // Atualize o estado dos pedidos para refletir a mudança
+    } else {
+      location.reload();
+    }
   }
 
   const handleRowClick = async (orderId) => {
@@ -159,6 +172,7 @@ export function AdminPanel() {
                       <select
                         defaultValue={order.status}
                         onChange={(event) => handleOrderStatus(order, event)}
+                        disabled={order.status === "🔴 Cancelado"} // Desabilita o select se o status for "Cancelado"
                       >
                         <option value="🟡 Pendente">🟡 Pendente</option>
                         <option value="🟠 Preparando">🟠 Preparando</option>
