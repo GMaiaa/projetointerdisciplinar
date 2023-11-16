@@ -115,6 +115,7 @@ export const CardContainer = styled.div`
 
 export const ImageStyle = {
     width: '70px',
+    margin: '10px'
   };
 
   export const TitleContainer = {

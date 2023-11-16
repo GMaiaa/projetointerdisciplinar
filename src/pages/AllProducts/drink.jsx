@@ -9,16 +9,16 @@ import {Item} from "../../components/Item"
 import { useParams } from 'react-router-dom';
 import { api } from '../../services/api';
 import { CiApple } from 'react-icons/ci';
-import FruitsImage from "../../assets/fruits.png";
+import drink from "../../assets/drink.png";
 import { useNavigate } from "react-router-dom";
 
 
-export function Products() {
+export function Drink() {
     const navigate = useNavigate();
     function handleDetails(id) {
         navigate(`/details/${id}`);
       }
-  const [fruits, setFruits] = useState([]);
+      const [drinks, setDrinks] = useState([])
   const params = useParams();
 
 
@@ -39,17 +39,17 @@ export function Products() {
     <Container>
     <Header />
     <div style={TitleContainer}>
-        <Title>Todas as Frutas</Title>
-        <img src={FruitsImage} alt="Logo da Quitanda Frescor" style={ImageStyle}/>
+        <Title>Todas as bebidas</Title>
+        <img src={drink} alt="Logo da Quitanda Frescor" style={ImageStyle}/>
     </div>
       <CardContainer>
-        {fruits.map((fruit, key) => (
-          <Card
-            key={String(fruit.id)}
-            product={fruit}
-            onCardClick={() => handleDetails(fruit.id)}
-          />
-        ))}
+      {drinks.map((drink) => (
+              <Card
+                key={String(drink.id)}
+                product = {drink}
+                onCardClick={() => handleDetails(drink.id)}
+              />
+            ))}
       </CardContainer>
       <Footer />
     </Container>

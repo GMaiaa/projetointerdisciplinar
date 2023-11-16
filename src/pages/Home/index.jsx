@@ -23,6 +23,10 @@ export function Home() {
     navigate(`/details/${id}`);
   }
 
+  function handleMoreClick(category) {
+    navigate(`/${category}`);
+  }
+
   useEffect(() => {
     async function fetchFilteredFruits() {
       try {
@@ -121,7 +125,7 @@ export function Home() {
 
       <Section>
       <h1 id="IDfruta">Frutas</h1>
-        <ButtonText title="Ver mais" />
+      <ButtonText title="Ver mais" onClick={() => handleMoreClick('fruits')} />
         <Items>
         {fruits.map((fruit, key) => (
               <Card
@@ -135,7 +139,8 @@ export function Home() {
 
       <Section>
         <h1 id="IDVerdura">Verduras</h1>
-        <ButtonText title="Ver mais" />
+        <ButtonText title="Ver mais" onClick={() => handleMoreClick('greenerys')} />
+
         <Items>
         {greenerys.map((greenery) => (
               <Card
@@ -149,7 +154,7 @@ export function Home() {
 
       <Section>
         <h1 id="IDLegume">Legumes</h1>
-        <ButtonText title="Ver mais" />
+        <ButtonText title="Ver mais" onClick={() => handleMoreClick('vegetables')} />
         <Items>
         {vegetables.map((vegetable) => (
               <Card
@@ -163,7 +168,7 @@ export function Home() {
 
       <Section>
         <h1 id="IDBebida">Bebidas</h1>
-        <ButtonText title="Ver mais" />
+        <ButtonText title="Ver mais" onClick={() => handleMoreClick('drinks')} />
         <Items>
         {drinks.map((drink) => (
               <Card
@@ -178,7 +183,7 @@ export function Home() {
 
       <Section>
         <h1 id="IDseila">Não Alimentar</h1>
-        <ButtonText title="Ver mais" />
+        <ButtonText title="Ver mais" onClick={() => handleMoreClick('nonfoods')} />
         <Items>
         {nonFoods.map((nonFood) => (
               <Card
