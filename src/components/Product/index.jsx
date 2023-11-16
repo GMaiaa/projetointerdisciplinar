@@ -30,8 +30,11 @@ export function Product({ data, ...rest }) {
     navigate(`/update/${data.id}`);
   }
 
+  // Adiciona fundo vermelho se a quantidade for menor ou igual a 20
+  const productStyle = data.amount <= 20 ? { backgroundColor: 'red' } : {};
+
   return (
-    <Container {...rest}>
+    <Container style={productStyle} {...rest}>
       <Body>
         <h1 onClick={handleDetails}>{data.name}</h1>
         <Options>
