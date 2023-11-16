@@ -39,10 +39,10 @@ export function Vegetables() {
   return (
     <Container>
     <Header />
-    <div style={TitleContainer}>
-        <Title>Todas os Legumes</Title>
-        <img src={vegetal} alt="Logo da Quitanda Frescor" style={ImageStyle}/>
-    </div>
+    <TitleContainer>
+        <Title>Todos os Legumes</Title>
+        <ImageStyle src={vegetal} alt="Logo da Quitanda Frescor" />
+    </TitleContainer>
       <CardContainer>
       {vegetables.map((vegetable) => (
               <Card

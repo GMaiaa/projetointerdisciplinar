@@ -39,10 +39,10 @@ const [greenerys, setGreenerys] = useState([]);
   return (
     <Container>
     <Header />
-    <div style={TitleContainer}>
+    <TitleContainer>
         <Title>Todas as verduras</Title>
-        <img src={vegetal} alt="Logo da Quitanda Frescor" style={ImageStyle}/>
-    </div>
+        <ImageStyle src={vegetal} alt="Logo da Quitanda Frescor" />
+    </TitleContainer>
       <CardContainer>
       {greenerys.map((greenery) => (
               <Card

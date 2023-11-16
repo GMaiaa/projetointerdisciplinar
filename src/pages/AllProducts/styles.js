@@ -98,11 +98,13 @@ export const Description = styled.p`
   font-size: 20px; 
   color: #808080; 
 `;
-export const Title = styled.span`
-  font-size: 30px; 
-  color: #da951c; 
-  text-align:center;
-  margin-top:20px;
+export const Title = styled.h1`
+text-align: center;
+font-size: 25px;
+color: #f2a61f;
+text-transform: uppercase;
+justify-content: center;
+  
 
 `;
 
@@ -114,15 +116,16 @@ export const CardContainer = styled.div`
   margin-right:100px;
 `;
 
-export const ImageStyle = {
-  width: '70px',
-  margin: '10px'
-};
+export const ImageStyle = styled.img `
+  width: 70px;
+  margin: 10px;
+`;
 
-export const TitleContainer = {
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'center'
-};
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 150px;
+`;
 

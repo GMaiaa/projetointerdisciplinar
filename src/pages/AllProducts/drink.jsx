@@ -38,10 +38,10 @@ export function Drink() {
   return (
     <Container>
     <Header />
-    <div style={TitleContainer}>
+    <TitleContainer>
         <Title>Todas as bebidas</Title>
-        <img src={drink} alt="Logo da Quitanda Frescor" style={ImageStyle}/>
-    </div>
+        <ImageStyle src={drink} alt="Logo da Quitanda Frescor" />
+    </TitleContainer>
       <CardContainer>
       {drinks.map((drink) => (
               <Card

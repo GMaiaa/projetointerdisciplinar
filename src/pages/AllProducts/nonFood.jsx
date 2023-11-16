@@ -38,10 +38,10 @@ export function NonFood() {
   return (
     <Container>
     <Header />
-    <div style={TitleContainer}>
+    <TitleContainer>
         <Title>Não alimentares</Title>
-        <img src={nonfood} alt="Logo da Quitanda Frescor" style={ImageStyle}/>
-    </div>
+        <ImageStyle src={nonfood} alt="Logo da Quitanda Frescor" />
+    </TitleContainer>
       <CardContainer>
       {nonFoods.map((nonFood) => (
               <Card

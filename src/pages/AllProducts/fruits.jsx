@@ -38,10 +38,10 @@ export function Fruits() {
   return (
     <Container>
     <Header />
-    <div style={TitleContainer}>
+    <TitleContainer>
         <Title>Todas as Frutas</Title>
-        <img src={frutas} alt="Logo da Quitanda Frescor" style={ImageStyle}/>
-    </div>
+        <ImageStyle src={frutas} alt="Logo da Quitanda Frescor"/>
+    </TitleContainer>
       <CardContainer>
         {fruits.map((fruit, key) => (
           <Card
