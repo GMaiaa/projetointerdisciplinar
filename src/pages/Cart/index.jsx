@@ -28,6 +28,8 @@ import { AlternativeButton } from "../../components/AlternativeButton";
 import { api } from "../../services/api";
 import { Item } from "../../components/Item";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
 
 
 export function Cart() {
@@ -35,14 +37,26 @@ export function Cart() {
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
   const [cep, setCep] = useState("");
+  const [adress, setAdress] = useState("");
+  const [complement, setComplement] = useState("");
   const [adressNumber, setAdressNumber] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [totalValue, setTotalValue] = useState(0);
-
   const [deliveryMethod, setDeliveryMethod] = useState("pickup");
   const [items, setItems] = useState([]);
+
   const navigate = useNavigate();
+  
+
+  async function fetchAddress(cep) {
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao buscar endereço:", error);
+    }
+  }
 
   function handleCpfChange(value) {
     // Remove todos os caracteres não numéricos
@@ -102,7 +116,9 @@ export function Cart() {
         cpf,
         email,
         cep: deliveryMethod === "delivery" ? cep : null,
+        adress: deliveryMethod === "delivery" ? adress : null,
         adressNumber: deliveryMethod === "delivery" ? adressNumber : null,
+        complement: deliveryMethod === "delivery" ? complement : null,
         phoneNumber,
         paymentMethod: deliveryMethod === "delivery" ? paymentMethod : null,
       },);
@@ -149,6 +165,16 @@ export function Cart() {
 
     fetchItems();
   }, []);
+
+  useEffect(() => {
+    if (cep.length === 8) { // Verifique se o CEP tem 8 dígitos
+      fetchAddress(cep).then((address) => {
+        if (address && !address.erro) {
+          setAdress(address.logradouro); // Atualize o estado do endereço
+        }
+      });
+    }
+  }, [cep]); // Chame essa função sempre que o valor do CEP mudar
 
   return (
     <Container>
@@ -227,12 +253,33 @@ export function Cart() {
                   <Input
                     placeholder="CEP"
                     icon={BiCurrentLocation}
-                    onChange={(e) => setCep(e.target.value)}
+                    onChange={(e) => {
+                      const cep = e.target.value;
+                      setCep(cep);
+                      if (cep.length === 8) { // Verifique se o CEP tem 8 dígitos
+                        fetchAddress(cep).then((address) => {
+                          if (address && !address.erro) {
+                            setAdress(address.logradouro); // Atualize o estado do endereço
+                          }
+                        });
+                      }
+                    }}
+                  />
+                  <Input
+                    placeholder="Endereço"
+                    icon={BiSolidBuildingHouse}
+                    value={adress} // Use o estado do endereço como valor
+                    readOnly // Adicione esta linha
                   />
                   <Input
                     placeholder="Número"
                     icon={BiSolidBuildingHouse}
                     onChange={(e) => setAdressNumber(e.target.value)}
+                  />
+                  <Input
+                    placeholder="Complemento"
+                    icon={BiSolidBuildingHouse}
+                    onChange={(e) => setComplement(e.target.value)}
                   />
                   <Select
                     onChange={(e) => handlePaymentMethodChange(e.target.value)}

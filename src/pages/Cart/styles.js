@@ -25,6 +25,7 @@ export const TotalValue = styled.p`
 `
 
 export const RadioContainer = styled.div`
+
   > label {
     display: block;
     position: relative;
