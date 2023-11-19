@@ -47,7 +47,7 @@ export function Cart() {
   const [items, setItems] = useState([]);
 
   const navigate = useNavigate();
-  
+
 
   async function fetchAddress(cep) {
     try {
@@ -104,7 +104,9 @@ export function Cart() {
       cpf,
       email,
       cep: deliveryMethod === "delivery" ? cep : null,
+      adress: deliveryMethod === "delivery" ? adress : null,
       adressNumber: deliveryMethod === "delivery" ? adressNumber : null,
+      complement: deliveryMethod === "delivery" ? complement : null,
       phoneNumber,
       paymentMethod: deliveryMethod === "delivery" ? paymentMethod : null,
     });
@@ -222,7 +224,7 @@ export function Cart() {
               <Input
                 placeholder="Celular"
                 icon={BiSolidPhone}
-                onChange={(e) => setPhoneNumber(formatPhoneNumber(e.target.value))}
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
               <RadioContainer>
                 <label>
