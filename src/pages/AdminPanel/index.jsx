@@ -16,6 +16,8 @@ import { Product } from "../../components/Product";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import moment from 'moment';
+
 
 
 export function AdminPanel() {
@@ -96,18 +98,9 @@ export function AdminPanel() {
   };
 
   function formatDate(date) {
-    const dateFormatted = new Date(date);
+    const dateFormatted = moment(date).utcOffset('-03:00');
 
-    let monthFormatted = (dateFormatted.getMonth() + 1).toString();
-    monthFormatted =
-      monthFormatted.length == 1 ? `0${monthFormatted}` : monthFormatted;
-
-    let minutesFormatted = dateFormatted.getMinutes().toString();
-    minutesFormatted =
-      minutesFormatted.length == 1 ? `0${minutesFormatted}` : minutesFormatted;
-
-    return `${dateFormatted.getDate()}/${monthFormatted} às ${dateFormatted.getHours() - 3
-      }h${minutesFormatted}`;
+    return dateFormatted.format('DD/MM [às] HH[h]mm');
   }
 
 
