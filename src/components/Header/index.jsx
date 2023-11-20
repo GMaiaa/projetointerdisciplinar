@@ -7,7 +7,7 @@ import { FiMail, FiLock } from "react-icons/fi"
 import { BiSupport } from "react-icons/bi"
 import { AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai";
 import  LogoImg from "../../assets/logo.png"
-import { useState } from "react";
+import { useState,useContext,useEffect } from "react";
 import { Input } from "../Input";
 import Checkbox from "../Checkbox";
 import { api } from "../../services/api";
@@ -15,10 +15,14 @@ import { useForm, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Link, animateScroll as scroll } from "react-scroll";
+import { CartContext } from "../../Context/CartContext";
+
 
  
  
 export function Header() {
+  const { isClicked, setIsClicked,itemsCount } = useContext(CartContext);
+
   return (
     <Container>
       <Logo>
@@ -35,9 +39,16 @@ export function Header() {
       </Navigation>
  
       <Options>
-       <OptionButton to="/cart">
-       <AiOutlineShoppingCart/>
-       </OptionButton>
+      <OptionButton 
+ to="/cart"
+ onClick={() => setIsClicked(!isClicked)}
+ style={{ 
+ animation: isClicked ? 'pulse 5s ease-in-out' : '',
+ color: isClicked ? '#DC2915' : '#17171f'
+ }}
+>
+ <AiOutlineShoppingCart/> {itemsCount > 0 ? itemsCount : ''}
+</OptionButton>
        <OptionButton to="/support">
        <BiSupport/>
        </OptionButton>

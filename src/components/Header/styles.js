@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CgProfile } from 'react-icons/cg';
+import { CgProfile } from 'react-icons/cg'
 import { Link } from "react-router-dom";
 
 export const Container = styled.header`
@@ -220,6 +220,7 @@ export const StyledButton = styled.button`
   &:hover {
     color: black;
   }
+
 `;
 
 export const OptionButton = styled(Link)`
@@ -232,5 +233,12 @@ export const OptionButton = styled(Link)`
     box-shadow: rgba(255, 172, 28, 0.199) 5px;
     
   }
-  
+  @keyframes pulse {
+   0% { transform: scale(1); }
+   50% { transform: scale(1.05); }
+   100% { transform: scale(1); }
+ }
 `;
+
+
+
