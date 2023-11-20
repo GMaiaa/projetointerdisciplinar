@@ -1,6 +1,6 @@
 import { RiShutDownLine } from "react-icons/ri";
 import { BiSolidUserPin,BiLogoWhatsappSquare } from "react-icons/bi";
-import { Container, Logo, Options, Navigation, OptionButton} from "./styles";
+import { Container, Logo, Options, Navigation, OptionButton,OptionButtonHover} from "./styles";
 import { StyledCgProfile } from './styles.js';
 import { CgProfile } from "react-icons/cg";
 import { FiMail, FiLock } from "react-icons/fi"
@@ -39,19 +39,16 @@ export function Header() {
       </Navigation>
  
       <Options>
-      <OptionButton 
- to="/cart"
- onClick={() => setIsClicked(!isClicked)}
- style={{ 
- animation: isClicked ? 'pulse 5s ease-in-out' : '',
- color: isClicked ? '#DC2915' : '#17171f'
- }}
->
- <AiOutlineShoppingCart/> {itemsCount > 0 ? itemsCount : ''}
-</OptionButton>
-       <OptionButton to="/support">
-       <BiSupport/>
-       </OptionButton>
+      <OptionButtonHover 
+            to="/cart"
+            onClick={() => setIsClicked(!isClicked)}
+            isClicked={isClicked}
+            >
+          <AiOutlineShoppingCart/> {itemsCount > 0 ? itemsCount : ''}
+      </OptionButtonHover>
+      <OptionButton to="/support">
+        <BiSupport/> 
+      </OptionButton>
       </Options>
     </Container>
      

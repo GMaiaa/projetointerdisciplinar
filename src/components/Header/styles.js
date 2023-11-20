@@ -224,19 +224,27 @@ export const StyledButton = styled.button`
 `;
 
 export const OptionButton = styled(Link)`
-  font-size: 30px;
-  color: #17171f;
-  transition: 0.2s ease-in-out;
+ font-size: 30px;
+ transition: 0.2s ease-in-out;
+ animation: ${props => props.isClicked ? 'pulse 5s ease-in-out' : ''};
 
-  &:hover{
-    color: #f2a61f;
-    box-shadow: rgba(255, 172, 28, 0.199) 5px;
-    
-  }
-  @keyframes pulse {
-   0% { transform: scale(1); }
-   50% { transform: scale(1.05); }
-   100% { transform: scale(1); }
+ color: ${props => props.isClicked ? '#DC2915' : '#17171f'};
+ &:hover{
+ color: #f2a61f;
+ box-shadow: rgba(255, 172, 28, 0.199) 5px;
+ }
+
+ @keyframes pulse {
+ 0% { transform: scale(1); }
+ 50% { transform: scale(1.05); }
+ 100% { transform: scale(1); }
+ }
+`;
+
+export const OptionButtonHover = styled(OptionButton)`
+ &:hover{
+ color: #f2a61f;
+ box-shadow: rgba(255, 172, 28, 0.199) 5px;
  }
 `;
 
