@@ -1,13 +1,13 @@
 import { RiShutDownLine } from "react-icons/ri";
 import { BiSolidUserPin,BiLogoWhatsappSquare } from "react-icons/bi";
-import { Container, Logo, Options, Navigation, OptionButton} from "./styles";
+import { Container, Logo, Options, Navigation, OptionButton,OptionButtonHover} from "./styles";
 import { StyledCgProfile } from './styles.js';
 import { CgProfile } from "react-icons/cg";
 import { FiMail, FiLock } from "react-icons/fi"
 import { BiSupport } from "react-icons/bi"
 import { AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai";
 import  LogoImg from "../../assets/logo.png"
-import { useState } from "react";
+import { useState,useContext,useEffect } from "react";
 import { Input } from "../Input";
 import Checkbox from "../Checkbox";
 import { api } from "../../services/api";
@@ -15,10 +15,14 @@ import { useForm, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Link, animateScroll as scroll } from "react-scroll";
+import { CartContext } from "../../Context/CartContext";
+
 
  
  
 export function Header() {
+  const { isClicked, setIsClicked,itemsCount } = useContext(CartContext);
+
   return (
     <Container>
       <Logo>
@@ -35,12 +39,16 @@ export function Header() {
       </Navigation>
  
       <Options>
-       <OptionButton to="/cart">
-       <AiOutlineShoppingCart/>
-       </OptionButton>
-       <OptionButton to="/support">
-       <BiSupport/>
-       </OptionButton>
+      <OptionButtonHover 
+            to="/cart"
+            onClick={() => setIsClicked(!isClicked)}
+            isClicked={isClicked}
+            >
+          <AiOutlineShoppingCart/> {itemsCount > 0 ? itemsCount : ''}
+      </OptionButtonHover>
+      <OptionButton to="/support">
+        <BiSupport/> 
+      </OptionButton>
       </Options>
     </Container>
      

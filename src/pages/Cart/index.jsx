@@ -23,17 +23,19 @@ import {
 } from "react-icons/bi";
 import { MdEmail, MdOutlinePayment } from "react-icons/md";
 import { Button } from "../../components/Button";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { AlternativeButton } from "../../components/AlternativeButton";
 import { api } from "../../services/api";
 import { Item } from "../../components/Item";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../Context/CartContext";
 import axios from 'axios';
 
 
 
 
 export function Cart() {
+  const [cartItems, setCartItems] = useState([]);
   const [client, setClient] = useState("");
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
@@ -46,6 +48,7 @@ export function Cart() {
   const [totalValue, setTotalValue] = useState(0);
   const [deliveryMethod, setDeliveryMethod] = useState("pickup");
   const [items, setItems] = useState([]);
+  
 
   const navigate = useNavigate();
 
@@ -170,10 +173,11 @@ export function Cart() {
     }
 
     // Chame updateTotalValue sempre que o componente for montado
-
-
-    fetchItems();
+    fetchItems()
+      
   }, []);
+
+
 
   useEffect(() => {
     if (cep.length === 8) { // Verifique se o CEP tem 8 dígitos
@@ -185,7 +189,7 @@ export function Cart() {
     }
   }, [cep]); // Chame essa função sempre que o valor do CEP mudar
 
-  return (
+  return(
     <Container>
       <Header />
       <Content>
