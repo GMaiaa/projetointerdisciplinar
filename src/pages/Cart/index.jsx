@@ -112,7 +112,9 @@ export function Cart() {
       cpf,
       email,
       cep: deliveryMethod === "delivery" ? cep : null,
+      adress: deliveryMethod === "delivery" ? adress : null,
       adressNumber: deliveryMethod === "delivery" ? adressNumber : null,
+      complement: deliveryMethod === "delivery" ? complement : null,
       phoneNumber,
       paymentMethod: deliveryMethod === "delivery" ? paymentMethod : null,
     });
