@@ -18,6 +18,10 @@ export function Details() {
 
   const navigate = useNavigate();
 
+  function handleDetails(id) {
+    navigate(`/details/${id}`);
+  }
+
   function backHome() {
     navigate("/");
   }
@@ -38,7 +42,7 @@ export function Details() {
     }
 
     fetchProduct();
-  }, []);
+  }, [params.id]);
 
   useEffect(() => {
     if (data) {
@@ -82,17 +86,18 @@ export function Details() {
         <Title>Veja também:</Title>
         <Items>
           {additionalProducts.slice(0, 5).map((product) => (
-            <Item
-              key={product.id}
-              name={product.name}
-              value={product.value.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-              })}
-              urlImage={product.image}
-              onOrderClick={() => HandleAddItem(product.id)}
-            />
+            <div onClick={() => handleDetails(product.id)}>
+              <Item
+                key={product.id}
+                name={product.name}
+                value={product.value.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                  minimumFractionDigits: 2,
+                })}
+                urlImage={product.image}
+              />
+            </div>
           ))}
         </Items>
         <Footer />

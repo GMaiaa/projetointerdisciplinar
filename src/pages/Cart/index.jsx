@@ -32,6 +32,7 @@ import axios from 'axios';
 
 
 
+
 export function Cart() {
   const [client, setClient] = useState("");
   const [cpf, setCpf] = useState("");
@@ -47,7 +48,7 @@ export function Cart() {
   const [items, setItems] = useState([]);
 
   const navigate = useNavigate();
-  
+
 
   async function fetchAddress(cep) {
     try {
@@ -99,6 +100,13 @@ export function Cart() {
   };
 
   async function handleFinishOrder() {
+    if (deliveryMethod === "delivery") {
+      if (!cep || !adress || !adressNumber || !paymentMethod) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return;
+      }
+    }
+
     console.log({
       client,
       cpf,
@@ -110,7 +118,6 @@ export function Cart() {
     });
 
     try {
-
       await api.post("/cart/confirmPurchase", {
         client,
         cpf,
@@ -121,7 +128,7 @@ export function Cart() {
         complement: deliveryMethod === "delivery" ? complement : null,
         phoneNumber,
         paymentMethod: deliveryMethod === "delivery" ? paymentMethod : null,
-      },);
+      });
 
       alert("Pedido realizado com sucesso!");
       backHome();
@@ -222,7 +229,7 @@ export function Cart() {
               <Input
                 placeholder="Celular"
                 icon={BiSolidPhone}
-                onChange={(e) => setPhoneNumber(formatPhoneNumber(e.target.value))}
+                onChange={(e) => setPhoneNumber(e.target.value)}
               />
               <RadioContainer>
                 <label>
@@ -232,7 +239,7 @@ export function Cart() {
                     checked={deliveryMethod === "delivery"}
                     onChange={() => handleDeliveryMethodChange("delivery")}
                   />
-                  <span class="checkmark"></span>
+                  <span className="checkmark"></span>
                   Entrega
                 </label>
               </RadioContainer>

@@ -1,32 +1,30 @@
-import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { Container, Options, Body } from "./styles";
 import { MdModeEditOutline, MdDelete } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export function Product({ data, ...rest }) {
+export function Product({ data, onDelete, ...rest }) {
   const navigate = useNavigate();
 
-  function HandleDeleteProduct() {
+  function handleDeleteProduct() {
     const confirm = window.confirm("Deseja realmente remover a nota?")
-    
 
-    if(confirm){
-    api.delete(`product/${data.id}`)
-      .then((response) => {
-        alert(`Item ${data.name} foi deletado`);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    if (confirm) {
+      api.delete(`product/${data.id}`)
+        .then(() => {
+          onDelete(data.id); // Chame a função de callback onDelete
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   }
 
-  function handleDetails(id) {
+  function handleDetails() {
     navigate(`/details/${data.id}`);
   }
 
-  function handleUpdate(id) {
+  function handleUpdate() {
     navigate(`/update/${data.id}`);
   }
 
@@ -41,7 +39,7 @@ export function Product({ data, ...rest }) {
           <button onClick={handleUpdate}>
             <MdModeEditOutline />
           </button>
-          <button onClick={HandleDeleteProduct}>
+          <button onClick={handleDeleteProduct}>
             <MdDelete />
           </button>
         </Options>

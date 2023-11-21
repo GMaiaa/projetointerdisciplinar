@@ -8,8 +8,9 @@ export const Container = styled.li`
   overflow: visible;
   font-size: 24px; /* Tamanho dos itens da lista de produtos */
   margin-bottom: 10px;
+  transition: all 0.6s ease;
   list-style: none;
-
+  cursor: pointer;
 
 
   > img{
@@ -43,6 +44,10 @@ color: black; /* Cor #7A7A7A (cinza) */
     border-radius: 0.25rem;
     border: none;
     margin-top: 20px;
+}
+
+&:hover{
+    box-shadow: rgba(255, 172, 28, 0.199) -10px 10px, rgba(255, 172, 28, 0.19) -20px 20px ;
 }
 
 `;
