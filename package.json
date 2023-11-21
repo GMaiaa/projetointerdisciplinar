@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^3.3.2",
     "axios": "^1.6.1",
     "cors": "^2.8.5",
+    "libphonenumber-js": "^1.10.49",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

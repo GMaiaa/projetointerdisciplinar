@@ -15,13 +15,13 @@ export function ItemCart({ data, ...rest }) {
     const confirm = window.confirm(
       `Deseja realmente remover o produto ${data.productName} do carrinho?`
     );
-    console.log(data.id);
 
     if (confirm) {
       api
         .delete(`cart/${data.id}`)
-        .then((response) => {
+        .then(() => {
           alert(`Item ${data.productName} foi deletado`);
+          window.location.reload(); // Adicione esta linha
         })
         .catch((error) => {
           console.error(error);

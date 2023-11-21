@@ -26,6 +26,11 @@ export function AdminPanel() {
   const [activeSection, setActiveSection] = useState("Estoque"); // Track the active section
   const navigate = useNavigate();
 
+  function handleDeleteProduct(id) {
+    // Remova o produto da lista de produtos
+    setProducts(products.filter(product => product.id !== id));
+  }
+
   function handleDetails(id) {
     navigate(`/details/${id}`);
   }
@@ -49,13 +54,22 @@ export function AdminPanel() {
   }, []);
 
   useEffect(() => {
-    async function fetchOrders() {
-      const response = await api.get("/order/getAllOrders");
-      console.log(response);
-      setOrders(response.data);
-    }
+    // Carregar pedidos do servidor quando o componente é montado
     fetchOrders();
+
+    // Recarregar pedidos a cada 5 minutos
+    const intervalId = setInterval(fetchOrders, 5 * 60 * 1000); // 5 minutos em milissegundos
+
+    // Limpar o intervalo quando o componente é desmontado
+    return () => clearInterval(intervalId);
   }, []);
+
+  async function fetchOrders() {
+    const response = await api.get("/order/getAllOrders");
+    console.log(response);
+    const sortedOrders = response.data.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+    setOrders(sortedOrders);
+  }
 
   const handleSectionSelected = (section) => {
     setActiveSection(section);
@@ -63,10 +77,20 @@ export function AdminPanel() {
 
   async function handleOrderStatus(order, event) {
     let statusSelected = event.target.value;
+    let confirmMessage = '';
+    let successMessage = '';
 
     if (statusSelected === "🔴 Cancelado") {
-      const confirmCancel = window.confirm("Tem certeza de que deseja cancelar este pedido?");
-      if (!confirmCancel) {
+      confirmMessage = "Tem certeza de que deseja cancelar este pedido?";
+      successMessage = "O pedido foi cancelado com sucesso.";
+    } else if (statusSelected === "🟢 Entregue") {
+      confirmMessage = "Tem certeza de que deseja marcar este pedido como entregue?";
+      successMessage = "O pedido foi marcado como entregue com sucesso.";
+    }
+
+    if (confirmMessage) {
+      const confirmChange = window.confirm(confirmMessage);
+      if (!confirmChange) {
         return; // Se o usuário clicar em "Não", não faça nada
       }
     }
@@ -77,8 +101,9 @@ export function AdminPanel() {
 
     await api.put(`/order/updateOrderStatus/${order.id}`, cart);
 
-    if (statusSelected === "🔴 Cancelado") {
-      order.status = "🔴 Cancelado"; // Atualize o status do pedido localmente para "Cancelado"
+    if (successMessage) {
+      alert(successMessage); // Mostrar a mensagem de sucesso
+      order.status = statusSelected; // Atualize o status do pedido localmente
       setOrders([...orders]); // Atualize o estado dos pedidos para refletir a mudança
     } else {
       location.reload();
@@ -143,7 +168,7 @@ export function AdminPanel() {
         {activeSection === "Estoque" && (
           <Section title="Estoque">
             {products.map((product) => (
-              <Product key={String(product.id)} data={product} />
+              <Product key={String(product.id)} data={product} onDelete={handleDeleteProduct} />
             ))}
           </Section>
         )}
@@ -165,7 +190,7 @@ export function AdminPanel() {
                       <select
                         defaultValue={order.status}
                         onChange={(event) => handleOrderStatus(order, event)}
-                        disabled={order.status === "🔴 Cancelado"} // Desabilita o select se o status for "Cancelado"
+                        disabled={order.status === "🔴 Cancelado" || order.status === "🟢 Entregue"}
                       >
                         <option value="🟡 Pendente">🟡 Pendente</option>
                         <option value="🟠 Preparando">🟠 Preparando</option>

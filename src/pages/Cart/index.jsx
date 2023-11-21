@@ -33,6 +33,7 @@ import axios from 'axios';
 
 
 
+
 export function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [client, setClient] = useState("");
@@ -102,6 +103,13 @@ export function Cart() {
   };
 
   async function handleFinishOrder() {
+    if (deliveryMethod === "delivery") {
+      if (!cep || !adress || !adressNumber || !paymentMethod) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return;
+      }
+    }
+
     console.log({
       client,
       cpf,
@@ -115,7 +123,6 @@ export function Cart() {
     });
 
     try {
-
       await api.post("/cart/confirmPurchase", {
         client,
         cpf,
@@ -126,7 +133,7 @@ export function Cart() {
         complement: deliveryMethod === "delivery" ? complement : null,
         phoneNumber,
         paymentMethod: deliveryMethod === "delivery" ? paymentMethod : null,
-      },);
+      });
 
       alert("Pedido realizado com sucesso!");
       backHome();
@@ -238,7 +245,7 @@ export function Cart() {
                     checked={deliveryMethod === "delivery"}
                     onChange={() => handleDeliveryMethodChange("delivery")}
                   />
-                  <span class="checkmark"></span>
+                  <span className="checkmark"></span>
                   Entrega
                 </label>
               </RadioContainer>
