@@ -15,8 +15,8 @@ export function Home() {
   const [vegetables, setVegetables] = useState([])
   const [drinks, setDrinks] = useState([])
   const [nonFoods, setNonFoods] = useState([])
-  
-  
+
+
   const navigate = useNavigate();
 
   function handleDetails(id) {
@@ -31,9 +31,9 @@ export function Home() {
     async function fetchFilteredFruits() {
       try {
         const response = await api.get("/product", {
-        
+
         });
-       const filteredFruits = response.data.filter((i) => i.category == "Fruta").slice(0, 5)
+        const filteredFruits = response.data.filter((i) => i.category == "Fruta").slice(0, 5)
         setFruits(filteredFruits);
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
@@ -46,9 +46,9 @@ export function Home() {
     async function fetchFilteredGreenerys() {
       try {
         const response = await api.get("/product", {
-        
+
         });
-       const filteredGreenerys = response.data.filter((i) => i.category == "Verdura").slice(0, 5)
+        const filteredGreenerys = response.data.filter((i) => i.category == "Verdura").slice(0, 5)
         setGreenerys(filteredGreenerys);
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
@@ -61,9 +61,9 @@ export function Home() {
     async function fetchFilteredVegetables() {
       try {
         const response = await api.get("/product", {
-        
+
         });
-       const filteredVegetables = response.data.filter((i) => i.category == "Legume").slice(0, 5)
+        const filteredVegetables = response.data.filter((i) => i.category == "Legume").slice(0, 5)
         setVegetables(filteredVegetables);
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
@@ -76,9 +76,9 @@ export function Home() {
     async function fetchFilteredDrinks() {
       try {
         const response = await api.get("/product", {
-        
+
         });
-       const filteredDrinks = response.data.filter((i) => i.category == "Bebida").slice(0, 5)
+        const filteredDrinks = response.data.filter((i) => i.category == "Bebida").slice(0, 5)
         setDrinks(filteredDrinks);
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
@@ -91,9 +91,9 @@ export function Home() {
     async function fetchFilteredNonFoods() {
       try {
         const response = await api.get("/product", {
-        
+
         });
-       const filteredNonFoods = response.data.filter((i) => i.category == "Não alimentar").slice(0, 5)
+        const filteredNonFoods = response.data.filter((i) => i.category == "Não alimentar").slice(0, 5)
         setNonFoods(filteredNonFoods);
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
@@ -124,16 +124,16 @@ export function Home() {
       </AboutContent>
 
       <Section>
-      <h1 id="IDfruta">Frutas</h1>
-      <ButtonText title="Ver mais" onClick={() => handleMoreClick('fruits')} />
+        <h1 id="IDfruta">Frutas</h1>
+        <ButtonText title="Ver mais" onClick={() => handleMoreClick('fruits')} />
         <Items>
-        {fruits.map((fruit, key) => (
-              <Card
-                key={String(fruit.id)}
-                product = {fruit}
-                onCardClick={() => handleDetails(fruit.id)}
-              />
-            ))}
+          {fruits.map((fruit, key) => (
+            <Card
+              key={String(fruit.id)}
+              product={fruit}
+              onCardClick={() => handleDetails(fruit.id)}
+            />
+          ))}
         </Items>
       </Section>
 
@@ -142,13 +142,13 @@ export function Home() {
         <ButtonText title="Ver mais" onClick={() => handleMoreClick('greenerys')} />
 
         <Items>
-        {greenerys.map((greenery) => (
-              <Card
-                key={String(greenery.id)}
-                product = {greenery}
-                onCardClick={() => handleDetails(greenery.id)}
-              />
-            ))}
+          {greenerys.map((greenery) => (
+            <Card
+              key={String(greenery.id)}
+              product={greenery}
+              onCardClick={() => handleDetails(greenery.id)}
+            />
+          ))}
         </Items>
       </Section>
 
@@ -156,13 +156,13 @@ export function Home() {
         <h1 id="IDLegume">Legumes</h1>
         <ButtonText title="Ver mais" onClick={() => handleMoreClick('vegetables')} />
         <Items>
-        {vegetables.map((vegetable) => (
-              <Card
-                key={String(vegetable.id)}
-                product = {vegetable}
-                onCardClick={() => handleDetails(vegetable.id)}
-              />
-            ))}
+          {vegetables.map((vegetable) => (
+            <Card
+              key={String(vegetable.id)}
+              product={vegetable}
+              onCardClick={() => handleDetails(vegetable.id)}
+            />
+          ))}
         </Items>
       </Section>
 
@@ -170,28 +170,28 @@ export function Home() {
         <h1 id="IDBebida">Bebidas</h1>
         <ButtonText title="Ver mais" onClick={() => handleMoreClick('drinks')} />
         <Items>
-        {drinks.map((drink) => (
-              <Card
-                key={String(drink.id)}
-                product = {drink}
-                onCardClick={() => handleDetails(drink.id)}
-              />
-            ))}
+          {drinks.map((drink) => (
+            <Card
+              key={String(drink.id)}
+              product={drink}
+              onCardClick={() => handleDetails(drink.id)}
+            />
+          ))}
         </Items>
-        
+
       </Section>
 
       <Section>
         <h1 id="IDseila">Não Alimentar</h1>
         <ButtonText title="Ver mais" onClick={() => handleMoreClick('nonfoods')} />
         <Items>
-        {nonFoods.map((nonFood) => (
-              <Card
-                key={String(nonFood.id)}
-                product = {nonFood}
-                onCardClick={() => handleDetails(nonFood.id)}
-              />
-            ))}
+          {nonFoods.map((nonFood) => (
+            <Card
+              key={String(nonFood.id)}
+              product={nonFood}
+              onCardClick={() => handleDetails(nonFood.id)}
+            />
+          ))}
         </Items>
       </Section>
       <Footer />

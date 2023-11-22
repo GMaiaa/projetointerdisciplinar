@@ -2,22 +2,19 @@
 import React, { useEffect, useState } from 'react';
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-import {Content, Description,Title, Info, Container, More,CardContainer,ImageStyle,TitleContainer} from "./styles";
-import {Card} from "../../components/Card";
-import {Items} from "../../pages/Home/styles";
-import {Item} from "../../components/Item"
+import { Title, Container, CardContainer, ImageStyle, TitleContainer } from "./styles";
+import { Card } from "../../components/Card";
 import { useParams } from 'react-router-dom';
 import { api } from '../../services/api';
-import { CiApple } from 'react-icons/ci';
 import frutas from "../../assets/frutas.png";
 import { useNavigate } from "react-router-dom";
 
 
 export function Fruits() {
-    const navigate = useNavigate();
-    function handleDetails(id) {
-        navigate(`/details/${id}`);
-      }
+  const navigate = useNavigate();
+  function handleDetails(id) {
+    navigate(`/details/${id}`);
+  }
   const [fruits, setFruits] = useState([]);
   const params = useParams();
 
@@ -37,11 +34,11 @@ export function Fruits() {
 
   return (
     <Container>
-    <Header />
-    <TitleContainer>
+      <Header />
+      <TitleContainer>
         <Title>Todas as Frutas</Title>
-        <ImageStyle src={frutas} alt="Logo da Quitanda Frescor"/>
-    </TitleContainer>
+        <ImageStyle src={frutas} alt="Logo da Quitanda Frescor" />
+      </TitleContainer>
       <CardContainer>
         {fruits.map((fruit, key) => (
           <Card

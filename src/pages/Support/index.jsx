@@ -5,11 +5,9 @@ import Undraw from "../../assets/suport.svg";
 import Troca from "../../assets/troca.jpg"
 import Pagamento from "../../assets/pagamento.jpg";
 import Info from "../../assets/info.jpg"
-import { Card } from "../../components/Card";
 import { ButtonText } from "../../components/ButtonText";
 import { SupportContactCard } from "../../components/SupportContactCard";
 import { SupportCard } from "../../components/SupportCard";
-import { AiFillInstagram } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 

@@ -2,12 +2,11 @@ import { useState } from "react";
 import { api } from "../../services/api";
 import { Container, Title } from "./styles";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+
 
 export function ItemCart({ data, ...rest }) {
   const [quantity, setQuantity] = useState(data.quantity);
   const [subtotal, setSubtotal] = useState(data.subTotalValue);
-  const navigate = useNavigate();
 
 
 

@@ -4,8 +4,6 @@ import {
   ItemsCart,
   Info,
   Form,
-  Payment,
-  Options,
   Content,
   AboutOrder,
   RadioContainer,
@@ -21,12 +19,11 @@ import {
   BiSolidBuildingHouse,
   BiSolidPhone,
 } from "react-icons/bi";
-import { MdEmail, MdOutlinePayment } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
 import { Button } from "../../components/Button";
 import { useEffect, useState } from "react";
 import { AlternativeButton } from "../../components/AlternativeButton";
 import { api } from "../../services/api";
-import { Item } from "../../components/Item";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
@@ -99,14 +96,15 @@ export function Cart() {
     setPaymentMethod(value);
   };
 
-  async function handleFinishOrder() {
-    if (deliveryMethod === "delivery") {
-      if (!cep || !adress || !adressNumber || !paymentMethod) {
-        alert("Por favor, preencha todos os campos obrigatórios.");
-        return;
-      }
+  async function validateFields() {
+    if (!cep || !adress || !adressNumber || !paymentMethod) {
+      alert("Por favor, preencha todos os campos obrigatórios.");
+      return Promise.resolve(false);
     }
+    return Promise.resolve(true);
+  }
 
+  async function logClientInfo() {
     console.log({
       client,
       cpf,
@@ -118,6 +116,14 @@ export function Cart() {
       phoneNumber,
       paymentMethod: deliveryMethod === "delivery" ? paymentMethod : null,
     });
+  }
+
+  async function handleFinishOrder() {
+    if (deliveryMethod === "delivery" && !(await validateFields())) {
+      return;
+    }
+
+    logClientInfo();
 
     try {
       await api.post("/cart/confirmPurchase", {
@@ -152,7 +158,7 @@ export function Cart() {
         const response = await api.get("/cart/getAllCartItems");
         console.log(response);
 
-        if (response.data && response.data.items) {
+        if (response.data?.items) {
           setItems(response.data.items);
 
           // Verifique se 'response.data.totalValue' existe antes de atualizar o estado
@@ -170,8 +176,6 @@ export function Cart() {
     }
 
     // Chame updateTotalValue sempre que o componente for montado
-
-
     fetchItems();
   }, []);
 
