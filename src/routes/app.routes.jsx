@@ -12,6 +12,9 @@ import { Vegetables } from '../pages/AllProducts/vegetables'
 import { Greenerys } from '../pages/AllProducts/greenerys'
 import { Drink } from '../pages/AllProducts/drink'
 import { NonFood } from '../pages/AllProducts/nonFood'
+import { PaymentMethods } from '../pages/PaymentMethods'
+import { ExchangeAndTrade } from '../pages/ExchangeAndTrade'
+import { AboutStore } from '../pages/AboutStore'
 
 
 
@@ -31,6 +34,12 @@ export function AppRoutes() {
             <Route path="/greenerys" element={<Greenerys/>}/>
             <Route path="/drinks" element={<Drink/>}/>
             <Route path="/nonfoods" element={<NonFood/>}/>
+            <Route path="/paymentinfo" element={<PaymentMethods/>}/>
+            <Route path="/exchangeinfo" element={<ExchangeAndTrade/>}/>
+            <Route path="/aboutstore" element={<AboutStore/>}/>
+
+
+
 
         </Routes>
     )

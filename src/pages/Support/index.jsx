@@ -44,9 +44,9 @@ export function Support() {
       </AboutSupport>
 
       <Questions>
-        <SupportCard image={Troca} title="Política de Troca / Estorno" description="Saiba detalhes de trocas e estornos de um produto." />
-        <SupportCard image={Pagamento} title="Formas de pagamento" description="Saiba as formas de pagamentos que aceitamos no momento da entrega" />
-        <SupportCard image={Info} title="Informações da loja" description="Informações como endereço, horario de funcionamento e muito mais " />
+        <SupportCard route="/exchangeinfo" image={Troca} title="Política de Troca / Estorno" description="Saiba detalhes de trocas e estornos de um produto." />
+        <SupportCard route="/paymentinfo" image={Pagamento} title="Formas de pagamento" description="Saiba as formas de pagamentos que aceitamos no momento da entrega" />
+        <SupportCard route="/aboutstore" image={Info} title="Informações da loja" description="Informações como endereço, horario de funcionamento e muito mais " />
 
       </Questions>
 

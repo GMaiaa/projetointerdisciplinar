@@ -257,7 +257,7 @@ export function Cart() {
                     checked={deliveryMethod === "pickup"}
                     onChange={() => handleDeliveryMethodChange("pickup")}
                   />
-                  <span class="checkmark"></span>
+                  <span className="checkmark"></span>
                   Retirada
                 </label>
               </RadioContainer>

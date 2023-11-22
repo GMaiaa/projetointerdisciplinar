@@ -17,12 +17,16 @@ import { api } from "../../services/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import moment from 'moment';
+import { MostOrderedProductsChart } from "../../components/MostOrderedProductsChart";
+
 
 
 
 export function AdminPanel() {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [mostOrderedProducts, setMostOrderedProducts] = useState([]);
+
   const [activeSection, setActiveSection] = useState("Estoque"); // Track the active section
   const navigate = useNavigate();
 
@@ -128,6 +132,14 @@ export function AdminPanel() {
     return dateFormatted.format('DD/MM [às] HH[h]mm');
   }
 
+  useEffect(() => {
+    async function fetchMostOrderedProducts() {
+      const response = await api.get("/order/getMostOrderedProducts");
+      setMostOrderedProducts(response.data);
+    }
+    fetchMostOrderedProducts();
+  }, []);
+
 
   return (
     <Container>
@@ -151,6 +163,14 @@ export function AdminPanel() {
             title="Pedidos"
             onClick={() => handleSectionSelected("Pedidos")} // Show Clientes section
             isActive={activeSection === "Pedidos"}
+            isAdminPanel={true}
+          />
+        </li>
+        <li>
+          <ButtonText
+            title="Relatório de vendas"
+            onClick={() => handleSectionSelected("Relatório de vendas")} // Show Clientes section
+            isActive={activeSection === "Relatório de vendas"}
             isAdminPanel={true}
           />
         </li>
@@ -212,6 +232,12 @@ export function AdminPanel() {
                 ))}
               </tbody>
             </Table>
+          </Section>
+        )}
+
+{activeSection === "Relatório de vendas" && (
+          <Section title="Relatório de vendas">
+              <MostOrderedProductsChart data={mostOrderedProducts}/>
           </Section>
         )}
       </Content>
