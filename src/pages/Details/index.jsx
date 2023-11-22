@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Content, Description, Title, Info, Container, More } from "./styles";
@@ -9,8 +9,11 @@ import { useParams } from 'react-router-dom';
 import { api } from '../../services/api';
 import { ButtonText } from "../../components/ButtonText";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../Context/CartContext";
+
 
 export function Details() {
+  const { isClicked, setIsClicked } = useContext(CartContext);
   const [data, setData] = useState(null);
   const [additionalProducts, setAdditionalProducts] = useState([]);
   const params = useParams();
@@ -24,13 +27,22 @@ export function Details() {
   function backHome() {
     navigate("/");
   }
+  useEffect(() => {
+    if (isClicked) {
+    setTimeout(() => {
+     setIsClicked(false);
+    }, 1500);
+    }
+   }, [isClicked]);
 
   function HandleAddItem(id) {
+
     console.log(`Adicionando produto ${id} ao carrinho`);
+    setIsClicked(true);
     api.get(`/cart/addCart/${id}`, {
       data: { id: id }
     });
-    window.alert("Produto adicionado ao carrinho!")
+    window.alert("Produto adicionado ao carrinho! finalize seu pedido clicando no ícone do carrinho.")
   }
 
 
