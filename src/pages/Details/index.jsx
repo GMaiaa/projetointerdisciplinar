@@ -3,7 +3,6 @@ import React, { useEffect, useState,useContext } from 'react';
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Content, Description, Title, Info, Container, More } from "./styles";
-import { Card } from "../../components/Card";
 import { Items } from "../../pages/Home/styles";
 import { Item } from "../../components/Item"
 import { useParams } from 'react-router-dom';

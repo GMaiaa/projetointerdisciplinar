@@ -103,18 +103,19 @@ export const Table = styled.table`
         font-size: 14px;
         color: #050505;
 
-     th {
-        position: sticky;
-        top: 0px;
+      th {
+      position: sticky;
+      top: 0px;
+      z-index: 1; 
 
-        height: 64px;
-        padding: 21px 24px;
-        border-bottom: 2px solid  #f2a61f;
-        
-        text-align: left;
-        color: #050505;
-        background:  #f2a61f;
-        text-align: center;
+      height: 64px;
+      padding: 21px 24px;
+      border-bottom: 2px solid  #f2a61f;
+      
+      text-align: left;
+      color: #050505;
+      background:  #f2a61f;
+      text-align: center;
     }
 
      th:first-child {

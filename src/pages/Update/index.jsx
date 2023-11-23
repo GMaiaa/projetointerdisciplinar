@@ -4,7 +4,6 @@ import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Container, Form } from "./styles";
-import { Textarea } from "../../components/Textarea";
 import { ButtonText } from "../../components/ButtonText";
 import { api } from "../../services/api"; // Importa o serviço API
 import { Select } from "../../components/Select";
@@ -13,7 +12,7 @@ export function Update() {
   const { id } = useParams();
   const navigate = useNavigate()
 
-  function backPanel(){
+  function backPanel() {
     navigate("/adminpanel")
   }
   const [productData, setProductData] = useState({
@@ -44,7 +43,7 @@ export function Update() {
       alert("Por favor, preencha todos os campos obrigatórios.");
       return;
     }
-  
+
     try {
       const updatedProduct = {
         name: productData.name,
@@ -55,9 +54,9 @@ export function Update() {
         category: productData.category,
         description: productData.description,
       };
-  
+
       await api.put(`/product/${id}`, updatedProduct);
-  
+
       alert("Produto Atualizado com sucesso!");
       backPanel();
     } catch (error) {
@@ -65,7 +64,7 @@ export function Update() {
       alert("Erro ao atualizar o produto. Tente novamente.");
     }
   };
-  
+
   const formatValueWithComma = (value) => {
     // Ensure that value is a string before calling replace
     if (typeof value === "number") {
@@ -74,7 +73,7 @@ export function Update() {
     return String(value).replace(".", ",");
   };
 
-  
+
   console.log("productData.description:", productData.description);
   console.log("productData.category:", productData.category);
 
