@@ -1,13 +1,13 @@
 import { RiShutDownLine } from "react-icons/ri";
 import { BiSolidUserPin, BiLogoWhatsappSquare } from "react-icons/bi";
-import { Container, Logo, Options, Navigation, OptionButton } from "./styles";
+import { Container, Logo, Options, Navigation, OptionButton, OptionButtonHover } from "./styles";
 import { StyledCgProfile } from './styles.js';
 import { CgProfile } from "react-icons/cg";
 import { FiMail, FiLock } from "react-icons/fi"
 import { BiSupport } from "react-icons/bi"
 import { AiOutlineShoppingCart, AiOutlineClose } from "react-icons/ai";
 import LogoImg from "../../assets/logo.png"
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Input } from "../Input";
 import Checkbox from "../Checkbox";
 import { api } from "../../services/api";
