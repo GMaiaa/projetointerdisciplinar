@@ -109,9 +109,9 @@ justify-content: center;
 `;
 
 export const CardContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px; /* Ajuste este valor para alterar o espaço entre os itens */
   margin-left:100px;
   margin-right:100px;
   margin-top: 150px;

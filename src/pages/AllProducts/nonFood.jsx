@@ -20,16 +20,16 @@ export function NonFood() {
 
 
   useEffect(() => {
-    async function fetchFilteredFruits() {
+    async function fetchFilteredNonFoods() {
       try {
         const response = await api.get("/product");
-        const filteredFruits = response.data.filter((i) => i.category == "Fruta");
-        setFruits(filteredFruits);
+        const filteredNonFoods = response.data.filter((i) => i.category == "Não alimentar");
+        setNonFoods(filteredNonFoods);
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
       }
     }
-    fetchFilteredFruits();
+    fetchFilteredNonFoods();
   }, []);
 
   return (
