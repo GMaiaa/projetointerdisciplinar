@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 import { MostOrderedProductsChart } from "../../components/MostOrderedProductsChart";
-
+import { debounce } from 'lodash';
 
 
 
@@ -26,9 +26,24 @@ export function AdminPanel() {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [mostOrderedProducts, setMostOrderedProducts] = useState([]);
+  const [search, setSearch] = useState('');
 
   const [activeSection, setActiveSection] = useState("Estoque"); // Track the active section
   const navigate = useNavigate();
+
+
+  const debouncedSearch = debounce(value => {
+    api.post("/product/findByName", { name: value })
+      .then(response => {
+        const products = response.data;
+        // Atualize o estado com os produtos retornados
+        setProducts(products);
+      });
+  }, 300);
+
+  useEffect(() => {
+    debouncedSearch(search);
+  }, [search]);
 
   function handleDeleteProduct(id) {
     // Remova o produto da lista de produtos
@@ -176,13 +191,15 @@ export function AdminPanel() {
         </li>
       </Menu>
 
-      <Search>
-        <Input
-          placeholder="Pesquisar pelo nome do produto"
-          icon={FiSearch}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </Search>
+      {activeSection === "Estoque" && (
+    <Search>
+      <Input
+        placeholder="Pesquisar pelo nome do produto"
+        icon={FiSearch}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+    </Search>
+  )}
 
       <Content>
         {activeSection === "Estoque" && (
