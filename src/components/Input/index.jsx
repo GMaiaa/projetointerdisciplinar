@@ -1,11 +1,14 @@
 import { Container } from "./styles";
+import InputMask from "react-input-mask"
  
 export function Input({ icon: Icon, errors, ...rest}){
     return(
-        <Container>
-            {Icon && <Icon size={20} />}
-            <input {...rest}/>
+        <Container errors={errors}>
             {errors && <p>{errors}</p>}
+            <div>
+                {Icon && <Icon size={20} />}
+                <InputMask {...rest} />                
+            </div>
         </Container>
     )
 }

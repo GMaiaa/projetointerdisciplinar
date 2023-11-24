@@ -4,6 +4,8 @@ import {
   ItemsCart,
   Info,
   Form,
+  Payment,
+  Options,
   Content,
   AboutOrder,
   RadioContainer,
@@ -19,37 +21,102 @@ import {
   BiSolidBuildingHouse,
   BiSolidPhone,
 } from "react-icons/bi";
-import { MdEmail } from "react-icons/md";
+import { MdEmail, MdOutlinePayment } from "react-icons/md";
 import { Button } from "../../components/Button";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { AlternativeButton } from "../../components/AlternativeButton";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../../Context/CartContext";
-import axios from 'axios';
-
-
-
-
+import { useFormik } from "formik";
+import axios from "axios";
+ 
 export function Cart() {
-  const [cartItems, setCartItems] = useState([]);
-  const [client, setClient] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [email, setEmail] = useState("");
+ 
+  const formik = useFormik({
+ 
+    validate: (values) => {
+      const errors = {}
+      console.log(values.cep)
+      if (!values.client) {
+        errors.client = "Campo obrigatório"
+      } if (!values.cpf) {
+        errors.cpf = "Campo obrigatório"
+      } if (!values.email) {
+        errors.email = "Campo obrigatório"
+      } if (!values.phoneNumber) {
+        errors.phoneNumber = "Campo obrigatório"
+      } if (values.deliveryMethod === "delivery") {
+        if (!cep) {
+          setCepError("Campo obrigatório")
+        } if (!cep && cep.length != 9
+          ) {
+          setCepError("CEP inválido")
+        } if (!adress) {
+          errors.adress = "Campo obrigatório"
+        } if (!values.adressNumber) {
+          errors.adressNumber = "Campo obrigatório"
+        }
+      } return errors
+     
+    },
+ 
+    initialValues: {
+      deliveryMethod: 'pickup',
+      client: "",
+      cpf: "",
+      email: "",
+      phoneNumber: "",
+      adressNumber: "",
+      paymentMethod: "none",
+      complement: "",
+    },
+    onSubmit: async (values) => {
+      try {
+ 
+        await api.post("/cart/confirmPurchase", {
+          client: values.client,
+          cpf: values.cpf,
+          email: values.email,
+          cep: cep,
+          adress: adress,
+          adressNumber: deliveryMethod === "delivery" ? values.adressNumber : null,
+          phoneNumber: values.phoneNumber,
+          paymentMethod: deliveryMethod === "delivery" ? values.paymentMethod : null,
+          complement: deliveryMethod === "delivery" ? values.complement : null
+        },);
+ 
+        alert("Pedido realizado com sucesso!");
+        backHome();
+      } catch (error) {
+        console.error("Erro ao finalizar o pedido:", error.response);
+ 
+        if (error.response) {
+          console.error("Status do erro:", error.response.status);
+          console.error("Dados do erro:", error.response.data);
+        }
+ 
+        alert("Erro ao finalizar o pedido. Por favor, tente novamente.");
+      }
+    },
+    validateOnChange: false
+  });
+ 
   const [cep, setCep] = useState("");
+  const [cepError, setCepError] = useState(null);
   const [adress, setAdress] = useState("");
-  const [complement, setComplement] = useState("");
-  const [adressNumber, setAdressNumber] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
   const [totalValue, setTotalValue] = useState(0);
   const [deliveryMethod, setDeliveryMethod] = useState("pickup");
   const [items, setItems] = useState([]);
-
-
   const navigate = useNavigate();
-
-
+ 
+  function backHome() {
+    navigate("/");
+  }
+ 
+  const handlePaymentMethodChange = (value) => {
+    setPaymentMethod(value);
+  };
+ 
   async function fetchAddress(cep) {
     try {
       const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
@@ -58,112 +125,21 @@ export function Cart() {
       console.error("Erro ao buscar endereço:", error);
     }
   }
-
-  function handleCpfChange(value) {
-    // Remove todos os caracteres não numéricos
-    let cpf = value.replace(/\D/g, "");
-
-    // Limita a entrada para 11 dígitos
-    cpf = cpf.slice(0, 11);
-
-    // Formata o CPF
-    cpf = formatCpf(cpf);
-
-    setCpf(cpf);
+ 
+  function handleRadioButtons(e) {
+    formik.values.deliveryMethod = e.target.value
+    setDeliveryMethod(e.target.value);
   }
-
-  function formatCpf(value) {
-    // Remove todos os caracteres não numéricos
-    let cpf = value.replace(/\D/g, "");
-
-
-    // Adiciona um ponto após o terceiro e o sexto dígitos
-    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-
-    // Adiciona um hífen após o nono dígito
-    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-
-    return cpf;
-  }
-
-  function backHome() {
-    navigate("/");
-  }
-
-  const handleDeliveryMethodChange = (method) => {
-    setDeliveryMethod(method);
-  };
-
-  const handlePaymentMethodChange = (value) => {
-    setPaymentMethod(value);
-  };
-
-  async function validateFields() {
-    if (!cep || !adress || !adressNumber || !paymentMethod) {
-      alert("Por favor, preencha todos os campos obrigatórios.");
-      return Promise.resolve(false);
-    }
-    return Promise.resolve(true);
-  }
-
-  async function logClientInfo() {
-    console.log({
-      client,
-      cpf,
-      email,
-      cep: deliveryMethod === "delivery" ? cep : null,
-      adress: deliveryMethod === "delivery" ? adress : null,
-      adressNumber: deliveryMethod === "delivery" ? adressNumber : null,
-      complement: deliveryMethod === "delivery" ? complement : null,
-      phoneNumber,
-      paymentMethod: deliveryMethod === "delivery" ? paymentMethod : null,
-    });
-  }
-
-  async function handleFinishOrder() {
-    if (deliveryMethod === "delivery" && !(await validateFields())) {
-      return;
-    }
-
-    logClientInfo();
-
-    try {
-      await api.post("/cart/confirmPurchase", {
-        client,
-        cpf,
-        email,
-        cep: deliveryMethod === "delivery" ? cep : null,
-        adress: deliveryMethod === "delivery" ? adress : null,
-        adressNumber: deliveryMethod === "delivery" ? adressNumber : null,
-        complement: deliveryMethod === "delivery" ? complement : null,
-        phoneNumber,
-        paymentMethod: deliveryMethod === "delivery" ? paymentMethod : null,
-      });
-
-      alert("Pedido realizado com sucesso!");
-      backHome();
-    } catch (error) {
-      console.error("Erro ao finalizar o pedido:", error.response);
-
-      if (error.response) {
-        console.error("Status do erro:", error.response.status);
-        console.error("Dados do erro:", error.response.data);
-      }
-
-      alert("Erro ao finalizar o pedido. Por favor, tente novamente.");
-    }
-  }
-
+ 
   useEffect(() => {
     async function fetchItems() {
       try {
         const response = await api.get("/cart/getAllCartItems");
         console.log(response);
-
-        if (response.data?.items) {
+ 
+        if (response.data && response.data.items) {
           setItems(response.data.items);
-
+ 
           // Verifique se 'response.data.totalValue' existe antes de atualizar o estado
           if (response.data.totalValue !== undefined) {
             setTotalValue(response.data.totalValue);
@@ -177,24 +153,21 @@ export function Cart() {
         console.error("Erro ao buscar itens do carrinho:", error);
       }
     }
-
-    // Chame updateTotalValue sempre que o componente for montado
-    fetchItems()
-
+    fetchItems();
   }, []);
-
-
-
+ 
   useEffect(() => {
-    if (cep.length === 8) { // Verifique se o CEP tem 8 dígitos
-      fetchAddress(cep).then((address) => {
+    const formatedCEP = cep.replace("-", "")
+    if (cep.length === 9) { // Verifique se o CEP tem 8 dígitos
+      fetchAddress(formatedCEP).then((address) => {
         if (address && !address.erro) {
           setAdress(address.logradouro); // Atualize o estado do endereço
         }
       });
     }
   }, [cep]); // Chame essa função sempre que o valor do CEP mudar
-
+ 
+ 
   return (
     <Container>
       <Header />
@@ -207,7 +180,7 @@ export function Cart() {
                 items.map((item) => (
                   <ItemCart key={String(item.id)} data={item} />
                 ))
-
+ 
               ) : (
                 <p>Nenhum item no carrinho</p>
               )}
@@ -216,42 +189,58 @@ export function Cart() {
                 currency: "BRL",
                 minimumFractionDigits: 2,
               })}</TotalValue>
-
+ 
             </ItemsCart>
           </Order>
           <Info>
             <h1>Dados do Pedido</h1>
-            <Form>
+            <form onSubmit={formik.handleSubmit}>
               <Input
                 placeholder="Nome Completo"
                 icon={BiSolidUser}
-                onChange={(e) => setClient(e.target.value)}
+                name="client"
+                onChange={formik.handleChange}
+                value={formik.values.client}
+                errors={formik.errors.client}
               />
               <Input
+                mask="999.999.999-99"
+                maskChar={null}
                 placeholder="CPF"
                 icon={BiSolidUser}
-                value={cpf}
-                onChange={(e) => handleCpfChange(e.target.value)}
+                name="cpf"
+                onChange={formik.handleChange}
+                value={formik.values.cpf}
+                errors={formik.errors.cpf}
               />
               <Input
                 placeholder="E-mail"
                 icon={MdEmail}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+                errors={formik.errors.email}
               />
               <Input
                 placeholder="Celular"
+                mask="(99) 99999-9999"
+                maskChar={null}
                 icon={BiSolidPhone}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                name="phoneNumber"
+                onChange={formik.handleChange}
+                value={formik.values.phoneNumber}
+                errors={formik.errors.phoneNumber}
               />
               <RadioContainer>
                 <label>
                   <input
                     type="radio"
+                    name="deliveryMethod"
                     value="delivery"
                     checked={deliveryMethod === "delivery"}
-                    onChange={() => handleDeliveryMethodChange("delivery")}
+                    onChange={handleRadioButtons}
                   />
-                  <span className="checkmark"></span>
+                  <span class="checkmark"></span>
                   Entrega
                 </label>
               </RadioContainer>
@@ -261,58 +250,64 @@ export function Cart() {
                     type="radio"
                     value="pickup"
                     checked={deliveryMethod === "pickup"}
-                    onChange={() => handleDeliveryMethodChange("pickup")}
+                    onChange={handleRadioButtons}
                   />
-                  <span className="checkmark"></span>
+                  <span class="checkmark"></span>
                   Retirada
                 </label>
               </RadioContainer>
               {deliveryMethod === "delivery" && (
                 <>
                   <Input
+                    mask="99999-999"
+                    maskChar={null}
                     placeholder="CEP"
                     icon={BiCurrentLocation}
-                    onChange={(e) => {
-                      const cep = e.target.value;
-                      setCep(cep);
-                      if (cep.length === 8) { // Verifique se o CEP tem 8 dígitos
-                        fetchAddress(cep).then((address) => {
-                          if (address && !address.erro) {
-                            setAdress(address.logradouro); // Atualize o estado do endereço
-                          }
-                        });
-                      }
-                    }}
+                    name="cep"
+                    onChange={(e) => setCep(e.target.value)}
+                    value={cep}
+                    errors={cepError}
                   />
                   <Input
                     placeholder="Endereço"
                     icon={BiSolidBuildingHouse}
-                    value={adress} // Use o estado do endereço como valor
+                    onChange={(e) => setAdress(e.target.value)}
+                    value={adress}
+                    errors={formik.errors.adress}
+                    // value={adress} // Use o estado do endereço como valor
                     readOnly // Adicione esta linha
                   />
                   <Input
                     placeholder="Número"
                     icon={BiSolidBuildingHouse}
-                    onChange={(e) => setAdressNumber(e.target.value)}
+                    name="adressNumber"
+                    onChange={formik.handleChange}
+                    value={formik.values.adressNumber}
+                    errors={formik.errors.adressNumber}
                   />
                   <Input
-                    placeholder="Complemento"
+                    placeholder="Complemento (Opcional)"
                     icon={BiSolidBuildingHouse}
-                    onChange={(e) => setComplement(e.target.value)}
+                    name="complement"
+                    onChange={formik.handleChange}
+                    value={formik.values.complement}
+                    errors={formik.errors.complement}
                   />
                   <Select
-                    onChange={(e) => handlePaymentMethodChange(e.target.value)}
+                    name="paymentMethod"
+                    onChange={((e) => handlePaymentMethodChange(e.target.value), formik.handleChange)}
+                    value={formik.values.paymentMethod}
                   >
-                    <option value="none">Forma de pagamento</option>
-                    <option value="Dinheiro">Dinheiro</option>
+                    <option value="none" disabled>Forma de pagamento</option>
+                    <option value="Dinheiro" selected={true}>Dinheiro</option>
                     <option value="Débito">Débito</option>
                     <option value="Crédito">Crédito</option>
                   </Select>
                 </>
               )}
-              <Button title="Finalizar Pedido" onClick={handleFinishOrder} />
+              <Button title="Finalizar Pedido" type="submit"/>
               <AlternativeButton title="Continuar comprando" onClick={backHome} />
-            </Form>
+            </form>
           </Info>
         </AboutOrder>
       </Content>
