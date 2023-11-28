@@ -29,11 +29,11 @@ import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "axios";
- 
+
 export function Cart() {
- 
+
   const formik = useFormik({
- 
+
     validate: (values) => {
       const errors = {}
       console.log(values.cep)
@@ -49,7 +49,7 @@ export function Cart() {
         if (!cep) {
           setCepError("Campo obrigatório")
         } if (!cep && cep.length != 9
-          ) {
+        ) {
           setCepError("CEP inválido")
         } if (!adress) {
           errors.adress = "Campo obrigatório"
@@ -57,9 +57,9 @@ export function Cart() {
           errors.adressNumber = "Campo obrigatório"
         }
       } return errors
-     
+
     },
- 
+
     initialValues: {
       deliveryMethod: 'pickup',
       client: "",
@@ -72,7 +72,6 @@ export function Cart() {
     },
     onSubmit: async (values) => {
       try {
- 
         await api.post("/cart/confirmPurchase", {
           client: values.client,
           cpf: values.cpf,
@@ -82,25 +81,26 @@ export function Cart() {
           adressNumber: deliveryMethod === "delivery" ? values.adressNumber : null,
           phoneNumber: values.phoneNumber,
           paymentMethod: deliveryMethod === "delivery" ? values.paymentMethod : null,
-          complement: deliveryMethod === "delivery" ? values.complement : null
-        },);
- 
+          complement: deliveryMethod === "delivery" ? values.complement : null,
+          deliveryType: deliveryMethod === "delivery" ? "Delivery" : "Pickup", // Adicione esta linha
+        });
+
         alert("Pedido realizado com sucesso!");
         backHome();
       } catch (error) {
         console.error("Erro ao finalizar o pedido:", error.response);
- 
+
         if (error.response) {
           console.error("Status do erro:", error.response.status);
           console.error("Dados do erro:", error.response.data);
         }
- 
+
         alert("Erro ao finalizar o pedido. Por favor, tente novamente.");
       }
     },
     validateOnChange: false
   });
- 
+
   const [cep, setCep] = useState("");
   const [cepError, setCepError] = useState(null);
   const [adress, setAdress] = useState("");
@@ -108,15 +108,15 @@ export function Cart() {
   const [deliveryMethod, setDeliveryMethod] = useState("pickup");
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
- 
+
   function backHome() {
     navigate("/");
   }
- 
+
   const handlePaymentMethodChange = (value) => {
     setPaymentMethod(value);
   };
- 
+
   async function fetchAddress(cep) {
     try {
       const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
@@ -125,21 +125,26 @@ export function Cart() {
       console.error("Erro ao buscar endereço:", error);
     }
   }
- 
+
   function handleRadioButtons(e) {
-    formik.values.deliveryMethod = e.target.value
+    formik.setFieldValue('deliveryMethod', e.target.value);
     setDeliveryMethod(e.target.value);
+    if (e.target.value === "delivery") {
+      setDeliveryType("Delivery");
+    } else if (e.target.value === "pickup") {
+      setDeliveryType("Pickup");
+    }
   }
- 
+
   useEffect(() => {
     async function fetchItems() {
       try {
         const response = await api.get("/cart/getAllCartItems");
         console.log(response);
- 
+
         if (response.data && response.data.items) {
           setItems(response.data.items);
- 
+
           // Verifique se 'response.data.totalValue' existe antes de atualizar o estado
           if (response.data.totalValue !== undefined) {
             setTotalValue(response.data.totalValue);
@@ -155,7 +160,7 @@ export function Cart() {
     }
     fetchItems();
   }, []);
- 
+
   useEffect(() => {
     const formatedCEP = cep.replace("-", "")
     if (cep.length === 9) { // Verifique se o CEP tem 8 dígitos
@@ -166,8 +171,8 @@ export function Cart() {
       });
     }
   }, [cep]); // Chame essa função sempre que o valor do CEP mudar
- 
- 
+
+
   return (
     <Container>
       <Header />
@@ -180,7 +185,7 @@ export function Cart() {
                 items.map((item) => (
                   <ItemCart key={String(item.id)} data={item} />
                 ))
- 
+
               ) : (
                 <p>Nenhum item no carrinho</p>
               )}
@@ -189,7 +194,7 @@ export function Cart() {
                 currency: "BRL",
                 minimumFractionDigits: 2,
               })}</TotalValue>
- 
+
             </ItemsCart>
           </Order>
           <Info>
@@ -305,7 +310,7 @@ export function Cart() {
                   </Select>
                 </>
               )}
-              <Button title="Finalizar Pedido" type="submit"/>
+              <Button title="Finalizar Pedido" type="submit" />
               <AlternativeButton title="Continuar comprando" onClick={backHome} />
             </form>
           </Info>

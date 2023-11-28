@@ -105,6 +105,12 @@ export function AdminPanel() {
     } else if (statusSelected === "🟢 Entregue") {
       confirmMessage = "Tem certeza de que deseja marcar este pedido como entregue?";
       successMessage = "O pedido foi marcado como entregue com sucesso.";
+    } else if (statusSelected === "🟠 Preparando") {
+      confirmMessage = "Tem certeza de que deseja marcar este pedido como preparando?";
+      successMessage = "O pedido foi marcado como preparando com sucesso.";
+    } else if (statusSelected === "🔵 Entregando") {
+      confirmMessage = "Tem certeza de que deseja marcar este pedido como entregando?";
+      successMessage = "O pedido foi marcado como entregando com sucesso.";
     }
 
     if (confirmMessage) {
@@ -192,14 +198,14 @@ export function AdminPanel() {
       </Menu>
 
       {activeSection === "Estoque" && (
-    <Search>
-      <Input
-        placeholder="Pesquisar pelo nome do produto"
-        icon={FiSearch}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-    </Search>
-  )}
+        <Search>
+          <Input
+            placeholder="Pesquisar pelo nome do produto"
+            icon={FiSearch}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </Search>
+      )}
 
       <Content>
         {activeSection === "Estoque" && (
@@ -229,9 +235,10 @@ export function AdminPanel() {
                         onChange={(event) => handleOrderStatus(order, event)}
                         disabled={order.status === "🔴 Cancelado" || order.status === "🟢 Entregue"}
                       >
-                        <option value="🟡 Pendente">🟡 Pendente</option>
-                        <option value="🟠 Preparando">🟠 Preparando</option>
-                        <option value="🟢 Entregue">🟢 Entregue</option>
+                        {order.status === "🟡 Pendente" && <option value="🟡 Pendente">🟡 Pendente</option>}
+                        {["🟡 Pendente", "🟠 Preparando"].includes(order.status) && <option value="🟠 Preparando">🟠 Preparando</option>}
+                        {order.deliveryType === "Delivery" && ["🟡 Pendente", "🟠 Preparando", "🔵 Entregando"].includes(order.status) && <option value="🔵 Entregando">🔵 Entregando</option>}
+                        {["🟡 Pendente", "🟠 Preparando", "🔵 Entregando", "🟢 Entregue"].includes(order.status) && <option value="🟢 Entregue">🟢 Entregue</option>}
                         <option value="🔴 Cancelado">🔴 Cancelado</option>
                       </select>
                     </td>
@@ -252,9 +259,9 @@ export function AdminPanel() {
           </Section>
         )}
 
-{activeSection === "Relatório de vendas" && (
+        {activeSection === "Relatório de vendas" && (
           <Section title="Relatório de vendas">
-              <MostOrderedProductsChart data={mostOrderedProducts}/>
+            <MostOrderedProductsChart data={mostOrderedProducts} />
           </Section>
         )}
       </Content>
