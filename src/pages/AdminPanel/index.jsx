@@ -56,7 +56,7 @@ export function AdminPanel() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await api.get("/product");
+      const response = await api.get("/product/orderedByAmount");
       setProducts(response.data);
     }
 
